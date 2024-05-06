@@ -1,10 +1,13 @@
 const TelegramAPI = require('node-telegram-bot-api')
+const command = require('nodemon/lib/config/command')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 
 bot.setMyCommands ([
     {command: '/start', description: 'Начальное приветствие'},
-    {command: '/info', description: 'Информация о клиенте'}
+    {command: '/info', description: 'Информация о клиенте'},
+    {command: '/tool_info', description: 'Информация об инструменте'},
+    {command: '/sp_info', description: 'Поиск инструмента по запчасти'}
 ])
 
 bot.on('message', async msg =>{
