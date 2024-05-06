@@ -2,6 +2,16 @@ const TelegramAPI = require('node-telegram-bot-api')
 const command = require('nodemon/lib/config/command')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
+const sequelize = require('./db')
+
+const start = async ()=>{
+try {
+    await sequelize.authenticate()
+    await sequelize.sync()
+}
+catch (e){
+    console.log('No BD connecton', e)
+}
 
 bot.setMyCommands ([
     {command: '/start', description: 'Начальное приветствие'},
@@ -23,3 +33,7 @@ bot.on('message', async msg =>{
 
     return bot.sendMessage(chatID, 'I don\'t understand')
 } )
+
+}
+
+start()
