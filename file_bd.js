@@ -40,7 +40,7 @@ await Promise.all(promises)
 return masSP
 }
 
-async ()=>{
+const start = async () =>{
     const massp = await makeFromFileBD()
 
     try {
@@ -52,7 +52,7 @@ async ()=>{
         console.log('No BD connecton', e)
     }
     
-    for (let mas_sp_info of masSP){
+    for (let mas_sp_info of massp){
     let sp = mas_sp_info[sp]
         let tools = mas_sp_info[tool]
         let name = mas_sp_info[name]
@@ -61,3 +61,4 @@ async ()=>{
 
 }
 
+start()
