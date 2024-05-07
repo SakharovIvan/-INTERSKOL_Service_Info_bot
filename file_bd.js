@@ -1,6 +1,7 @@
 const fs = require('fs')
 const SparePartModel = require('./SPmodel');
 const util = require('util') 
+const sequelize = require('./SpareParts_bd');
 
 const RE_EOL = /\r?\n/;
 const TAB =/\t/
@@ -31,7 +32,15 @@ let sp_info = new SP(id.split(TAB))
     masSP.push(sp_info)
 }
 
-for(let mas_sp_info of masSP){
+try {
+    await sequelize.authenticate()
+    await sequelize.sync()
+}
+catch (e){
+    console.log('No BD connecton', e)
+}
+
+for (let mas_sp_info of masSP){
     let sp = mas_sp_info[sp]
     let tools = mas_sp_info[tool]
     let name = mas_sp_info[name]
