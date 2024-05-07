@@ -3,6 +3,18 @@ const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const sequelize = require('./bd')
 const UserModel = require('./models')
+const SparePartModel = require('./SPmodel');
+
+const spCheck = async()=>{
+    bot.on('message', async msg=>{
+        const text = msg.text
+        const sparePart = await SparePartModel.findOne({text})
+        
+    })
+
+    return bot.sendMessage(chatID, `Найдена следующая информация ${sparePart}`)
+}
+
 const start = async ()=>{
 try {
     await sequelize.authenticate()
@@ -31,11 +43,14 @@ bot.on('message', async msg =>{
     const user = await UserModel.findOne({chatID})
     user.msg = text
     if (text === '/start'){
-        
         return bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
     }
     if (text === '/info'){
         return bot.sendMessage(chatID, `Ваше имя ${msg.chat.first_name} ${msg.chat.last_name} ${user.msg}`)
+    }
+    if (text === '/sp_info'){
+        bot.sendMessage(chatID, `Ведите артикул запчасти`)
+        spCheck()
     }
 
     return bot.sendMessage(chatID, 'I don\'t understand')

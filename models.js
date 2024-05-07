@@ -1,5 +1,4 @@
 const sequelize = require('./bd')
-
 const {DataTypes}= require('sequelize')
 
 const User = sequelize.define('user', {
