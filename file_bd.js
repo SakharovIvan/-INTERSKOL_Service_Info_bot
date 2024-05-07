@@ -35,7 +35,7 @@ for(let mas_sp_info of masSP){
     let sp = mas_sp_info[sp]
     let tools = mas_sp_info[tool]
     let name = mas_sp_info[name]
-    await SparePartModel.create({sp},name,tools);
+    SparePartModel.create(sp,name,tools);
 }
 return
 }
