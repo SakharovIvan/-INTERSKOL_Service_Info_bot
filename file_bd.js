@@ -56,13 +56,14 @@ const start = async () =>{
     catch (e){
         console.log('No BD connecton', e)
     }
+    console.log(massp[8])
     
-    for (let mas_sp_info of massp){
-    let sp = mas_sp_info[sp]
+    massp.map(async (mas_sp_info)=>{
+        let sp = mas_sp_info[sp]
         let tools = mas_sp_info[tool]
         let name = mas_sp_info[name]
         await SparePartModel.create(sp,name,tools);
-    }
+    })
 
 }
 
