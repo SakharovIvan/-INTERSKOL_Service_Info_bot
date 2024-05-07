@@ -1,4 +1,4 @@
-const sequelize = require('./db')
+const sequelize = require('./bd')
 
 const {DataTypes}= require('sequelize')
 
