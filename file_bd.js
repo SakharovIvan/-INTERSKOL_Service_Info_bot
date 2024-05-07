@@ -41,8 +41,13 @@ return masSP
 }
 
 const start = async () =>{
+    try {
+        const massp = await makeFromFileBD()
+    }    catch (e){
+        console.log('massp problem', e)
+    }
+    
     const massp = await makeFromFileBD()
-
     try {
         await sequelize.authenticate()
         await sequelize.sync()
