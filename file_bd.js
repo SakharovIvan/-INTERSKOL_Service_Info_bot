@@ -1,5 +1,5 @@
 const fs = require('fs')
-const SparePartModel = require('./SPmodel');
+const SparePart = require('./SPmodel');
 const util = require('util') 
 const sequelize = require('./SpareParts_bd');
 
@@ -56,7 +56,12 @@ const start = async () =>{
         let spmas = mas_sp_info['sp']
         let toolsmas = mas_sp_info['tool']
         let namemas = mas_sp_info['name']
-       await SparePartModel.create({sp:spmas,name:namemas,tools:toolsmas});
+        try {
+            await SparePart.create({sp:spmas,name:namemas,tools:toolsmas})
+    }catch(e){
+console.log(`зч не записана в бд ${spmas}`,e)
+    }
+       
     })
 
 }
