@@ -35,7 +35,7 @@ bot.on('message', async msg =>{
         return bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
     }
     if (text === '/info'){
-        return bot.sendMessage(chatID, `Ваше имя ${msg.chat.first_name} ${msg.chat.last_name}`)
+        return bot.sendMessage(chatID, `Ваше имя ${msg.chat.first_name} ${msg.chat.last_name} ${user.msg}`)
     }
 
     return bot.sendMessage(chatID, 'I don\'t understand')
