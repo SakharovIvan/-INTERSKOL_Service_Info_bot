@@ -34,20 +34,13 @@ const promises = masData.map((id)=>{
 
 })
 await Promise.all(promises)
-
-
-
 return masSP
 }
 
 const start = async () =>{
-    try {
-        const massp = await makeFromFileBD()
-    }    catch (e){
-        console.log('massp problem', e)
-    }
-    
+
     const massp = await makeFromFileBD()
+
     try {
         await sequelize.authenticate()
         await sequelize.sync()
@@ -56,13 +49,14 @@ const start = async () =>{
     catch (e){
         console.log('No BD connecton', e)
     }
+
     console.log(massp[8])
     
-    massp.map(async (mas_sp_info)=>{
-        let sp = mas_sp_info[sp]
-        let tools = mas_sp_info[tool]
-        let name = mas_sp_info[name]
-        await SparePartModel.create(sp,name,tools);
+    massp.map((mas_sp_info)=>{
+        let spmas = mas_sp_info['sp']
+        let toolsmas = mas_sp_info['tool']
+        let namemas = mas_sp_info['name']
+        SparePartModel.create({sp:spmas},{name:namemas},{tools:toolsmas});
     })
 
 }
