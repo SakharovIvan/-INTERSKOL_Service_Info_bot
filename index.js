@@ -1,9 +1,8 @@
 const TelegramAPI = require('node-telegram-bot-api')
-const command = require('nodemon/lib/config/command')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const sequelize = require('./db')
-
+const UserModel = require('./models')
 const start = async ()=>{
 try {
     await sequelize.authenticate()
@@ -23,8 +22,16 @@ bot.setMyCommands ([
 bot.on('message', async msg =>{
     const text = msg.text
     const chatID = msg.chat.id
-    
+
+    try{
+        await UserModel.create({chatID})
+    }catch(e){
+        return bot.sendMessage(chatID,'Something going wrong with creating chatId model', e)
+    }
+    const user = await UserModel.findOne({chatID})
+    user.msg = text
     if (text === '/start'){
+        
         return bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
     }
     if (text === '/info'){
