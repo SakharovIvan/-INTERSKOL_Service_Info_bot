@@ -19,18 +19,22 @@ class SP  {
 
 const makeFromFileBD = async ()=>{
 const readFile = util.promisify(fs.readFile)
-const fileData = await readFile('./SP-ToolsUTF-8.txt', 'utf-8');
+const fileData = await readFile('./SP-ToolsUTF-8.txt', 'utf-8')
 const masData = fileData.split(RE_EOL)
+
 const masSP=[]
-for (let id of masData){
-let sp_info = new SP(id.split(TAB))
+const promises = masData.map((id)=>{
+    let sp_info = new SP(id.split(TAB))
     masSP.forEach((id)=>{
         if (id.sp==sp_info.sp){
             id.addTool(sp_info.tool[0])
         }
     })
     masSP.push(sp_info)
-}
+
+})
+await Promise.all(promises)
+
 
 try {
     await sequelize.authenticate()
@@ -41,10 +45,10 @@ catch (e){
 }
 
 for (let mas_sp_info of masSP){
-    let sp = mas_sp_info[sp]
+let sp = mas_sp_info[sp]
     let tools = mas_sp_info[tool]
     let name = mas_sp_info[name]
-    SparePartModel.create(sp,name,tools);
+    await SparePartModel.create(sp,name,tools);
 }
 return
 }
