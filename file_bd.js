@@ -52,11 +52,11 @@ const start = async () =>{
 
     console.log(massp[8])
     
-    massp.map((mas_sp_info)=>{
+    massp.map(async (mas_sp_info)=>{
         let spmas = mas_sp_info['sp']
         let toolsmas = mas_sp_info['tool']
         let namemas = mas_sp_info['name']
-        SparePartModel.create({sp:spmas},{name:namemas},{tools:toolsmas});
+       await SparePartModel.create({sp:spmas,name:namemas,tools:toolsmas});
     })
 
 }
