@@ -20,7 +20,7 @@ CREATE TABLE SparePartmas (
     );
     INSERT INTO SparePartmas (sp,name,tools)
 VALUES ('hello','im warking','qwerty');
-SELECT * FROM SparePartmas
+SELECT * FROM SparePartmas;
 `
 
 client.query(query, (err, res) => { 
