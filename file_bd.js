@@ -58,8 +58,8 @@ const start = async () =>{
         let namemas = mas_sp_info['name']
         let sparePartID 
         try {
-            await sparePart.create({id:idm})
-            sparePartID = await sparePart.findOne({id:idm})
+            await SparePart.create({id:idm})
+            sparePartID = await SparePart.findOne({id:idm})
             sparePartID.sp = spmas
             sparePartID.tools = toolsmas
             sparePartID.name = namemas
