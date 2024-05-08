@@ -57,7 +57,7 @@ const start = async () =>{
         let toolsmas = mas_sp_info['tool']
         let namemas = mas_sp_info['name']
         try {
-            await SparePart.findOne({sp:spmas,name:namemas,tools:toolsmas})
+            await SparePart.create({sp:spmas,name:namemas,tools:toolsmas})
         }catch(e){
         console.log(`зч не записана в бд ${spmas}`,e)
         }       
