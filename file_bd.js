@@ -64,4 +64,11 @@ await Promise.all(promises)
 return masSP
 }
 
-createTable()
+client.query(query, (err, res) => { 
+    if (err) { 
+    console.error(err); 
+    return; 
+    } 
+    console.log('Table is successfully created'); 
+    client.end(); 
+    }); 
