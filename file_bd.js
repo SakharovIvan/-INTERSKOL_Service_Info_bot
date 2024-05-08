@@ -51,15 +51,15 @@ const start = async () =>{
     }
 
     console.log(massp[8])
-    let idm=1
+    let id=1
     massp.map(async (mas_sp_info)=>{
         let spmas = mas_sp_info['sp']
         let toolsmas = mas_sp_info['tool']
         let namemas = mas_sp_info['name']
         let sparePartID 
         try {
-            await SparePart.create({id:idm})
-            sparePartID = await SparePart.findOne({id:idm})
+            await SparePart.create({id})
+            sparePartID = await SparePart.findOne({id})
             sparePartID.sp = spmas
             sparePartID.tools = toolsmas
             sparePartID.name = namemas
@@ -68,7 +68,7 @@ const start = async () =>{
         console.log(`зч не записана в бд ${spmas}`,e)
         }       
     })
-
+return
 }
 
 start()
