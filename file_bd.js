@@ -14,7 +14,7 @@ const client = new Client  ({
 
 const createTable = `
 CREATE TABLE sparepartmas ( 
-    id bigint GENERATED ALWAYS AS IDENTITY,
+    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     sp VARCHAR(50),
     name VARCHAR(150),
     tools text
