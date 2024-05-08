@@ -1,6 +1,6 @@
 const fs = require('fs')
 const util = require('util') 
-const {Client } = require('pg');
+const Client = require('pg');
 //const { database, password } = require('pg/lib/defaults');
 
 const db = new Client  ({
