@@ -55,7 +55,7 @@ bot.on('message', async msg =>{
         return spCheck()
     }
 
-    return bot.sendMessage(chatID, `Найдена следующая информация ${findSP(text)}`)
+    return bot.sendMessage(chatID, `Найдена следующая информация ${await findSP(text)}`)
 } )
 
 }
