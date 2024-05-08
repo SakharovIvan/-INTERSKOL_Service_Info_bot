@@ -1,7 +1,5 @@
-//const fs = require('fs')
-//const util = require('util') 
-
-const cli = require('nodemon/lib/cli');
+const fs = require('fs')
+const util = require('util') 
 const {Client} = require('pg');
 
 
