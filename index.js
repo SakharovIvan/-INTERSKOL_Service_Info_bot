@@ -3,16 +3,18 @@ const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const sequelize = require('./bd')
 const UserModel = require('./models')
-const SparePartModel = require('./SPmodel');
+//const SparePartModel = require('./SPmodel');
+const findSP = require('./file_bd')
 
 const spCheck = async()=>{
     bot.on('message', async msg=>{
+        await bot.sendMessage(chatID, `Введите информацию о инструменте`)
         const text = msg.text
-        const sparePart = await SparePartModel.findOne({text})
-        
+        return bot.sendMessage(chatID, `Найдена следующая информация ${findSP(text)}`)
+           
     })
 
-    return bot.sendMessage(chatID, `Найдена следующая информация ${sparePart}`)
+    
 }
 
 const start = async ()=>{

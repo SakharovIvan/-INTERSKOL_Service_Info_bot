@@ -1,7 +1,15 @@
 const fs = require('fs')
-const SparePart = require('./SPmodel');
 const util = require('util') 
-const sequelize = require('./SpareParts_bd');
+//const {SparePart} = require('pg');
+//const { database, password } = require('pg/lib/defaults');
+
+//const db = new SparePart ({
+//    user:'root',
+//    host:'192.168.0.74',
+//    database: 'SpareParts_bd',
+//    password: 'root',
+//    port:'5432'
+//})
 
 const RE_EOL = /\r?\n/;
 const TAB =/\t/
@@ -17,7 +25,7 @@ class SP  {
 }
 
 
-const makeFromFileBD = async ()=>{
+const makeFromFileBD = async (findSP)=>{
 const readFile = util.promisify(fs.readFile)
 const fileData = await readFile('./SP-ToolsUTF-8.txt', 'utf-8')
 const masData = fileData.split(RE_EOL)
@@ -34,41 +42,40 @@ const promises = masData.map((id)=>{
 
 })
 await Promise.all(promises)
+.then((data)=>data.filter((datasp)=>datasp.sp===findSP))
 return masSP
 }
-
-const start = async () =>{
-
-    const massp = await makeFromFileBD()
-
-    try {
-        await sequelize.authenticate()
-        await sequelize.sync()
-        console.log('Good BD connecton')
-    }
-    catch (e){
-        console.log('No BD connecton', e)
-    }
-
-    console.log(massp[8])
-    let id=1
-    massp.map(async (mas_sp_info)=>{
-        let spmas = mas_sp_info['sp']
-        let toolsmas = mas_sp_info['tool']
-        let namemas = mas_sp_info['name']
-        let sparePartID 
-        try {
-            await SparePart.create({id})
-            sparePartID = await SparePart.findOne({id})
-            sparePartID.sp = spmas
-            sparePartID.tools = toolsmas
-            sparePartID.name = namemas
-            idm+=1
-        }catch(e){
-        console.log(`зч не записана в бд ${spmas}`,e)
-        }       
-    })
-return
-}
-
-start()
+//
+//const start = async () =>{
+//    const massp = await makeFromFileBD()
+//
+//    try {
+//        await db.connect()
+//        console.log('Good BD connecton')
+//    }
+//    catch (e){
+//        console.log('No BD connecton', e)
+//    }
+//
+//    console.log(massp[8])
+//    let id=1
+//    massp.map(async (mas_sp_info)=>{
+//        let spmas = mas_sp_info['sp']
+//        let toolsmas = mas_sp_info['tool']
+//        let namemas = mas_sp_info['name']
+//        let sparePartID 
+//        try {
+//            await SparePart.create({id})
+//            sparePartID = await SparePart.findOne({id})
+//            sparePartID.sp = spmas
+//            sparePartID.tools = toolsmas
+//            sparePartID.name = namemas
+//            idm+=1
+//        }catch(e){
+//        console.log(`зч не записана в бд ${spmas}`,e)
+//        }       
+//    })
+//return
+//}
+//
+export {makeFromFileBD}
