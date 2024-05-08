@@ -83,7 +83,7 @@ const start = async()=>{
     } finally {
         for (let sp_info of massp){
             console.log(sp_info)
-            row = `${sp_info["sp"]}, ${sp_info["name"]}, ${sp_info["tool"]}`
+            row = `'${sp_info["sp"]}', '${sp_info["name"]}', '${sp_info["tool"]}'`
             console.log(row)
             try{
             await client.query(makeRow(table,tableRow,row))
