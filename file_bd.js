@@ -74,15 +74,17 @@ const start = async()=>{
     const table = 'sparepartmas'
     const tableRow = 'sp, name, tools'
     let row
-    client.connect((err)=>{
-        client.query(deleteTable,(err,res)=>{
-            client.query(createTable,()=>{
-                console.log('old querry deleted and created new')
-               client.end 
-            })
-        })
-        
-    })
+    await client.connect()
+    try {
+        await client.query(deleteTable)
+       await client.query(createTable)
+    }catch(err){
+        console.log(err)
+    } finally {
+        await client.end()
+     }
+
+
     
 
 for (let sp_info of massp){
