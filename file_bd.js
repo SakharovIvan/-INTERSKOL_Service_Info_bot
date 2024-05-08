@@ -1,14 +1,14 @@
 const fs = require('fs')
 const util = require('util') 
-const Client = require('pg');
+const {Client} = require('pg');
 //const { database, password } = require('pg/lib/defaults');
 
-const db = new Client  ({
+const client = new Client  ({
     user:'root',
     host:'192.168.0.74',
     database: 'SpareParts_bd',
     password: 'root',
-    port:'5432'
+    port:'5432',
 })
 
 const query = `
@@ -22,12 +22,12 @@ CREATE TABLE SparePart (
 
 const createTable = async()=>{
     try { 
-        await db.query(query); 
+        await client.query(query); 
         return console.log('Table is successfully created'); 
         } catch (err) { 
-        console.log(err.stack); 
+        console.log(err); 
         } finally { 
-        db.close(); 
+        client.close(); 
         } 
 }
 
@@ -64,8 +64,4 @@ await Promise.all(promises)
 return masSP
 }
 
-try {
-    createTable()
-}catch(e){
-    console.log(e)
-}
+createTable()
