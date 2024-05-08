@@ -24,7 +24,8 @@ SELECT * FROM SparePartmas;
 `
 async ()=>{
 try { 
-await client.query(query); 
+    await client.connect()
+    await client.query(query); 
     console.log('Table is successfully created'); 
     } catch (err) { 
     console.log(err.stack); 
