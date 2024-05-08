@@ -25,7 +25,7 @@ class SP  {
 }
 
 
-const makeFromFileBD = async (findSP)=>{
+const makeFromFileBD = async (findSP)=> {
 const readFile = util.promisify(fs.readFile)
 const fileData = await readFile('./SP-ToolsUTF-8.txt', 'utf-8')
 const masData = fileData.split(RE_EOL)
@@ -78,4 +78,4 @@ return masSP
 //return
 //}
 //
-export {makeFromFileBD}
+module.exports = makeFromFileBD
