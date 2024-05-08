@@ -52,7 +52,7 @@ bot.on('message', async msg =>{
     }
     if (text === '/sp_info'){
         bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        spCheck()
+        await spCheck()
     }
 
     return bot.sendMessage(chatID, 'I don\'t understand')
