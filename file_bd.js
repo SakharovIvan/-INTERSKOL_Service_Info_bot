@@ -1,6 +1,7 @@
 //const fs = require('fs')
 //const util = require('util') 
 
+const cli = require('nodemon/lib/cli');
 const {Client} = require('pg');
 
 
@@ -24,15 +25,23 @@ VALUES ('hello','im warking','qwerty');
 SELECT * FROM SparePartmas;
 `
 
-await client.connect()
-try {     
-    const res = await client.query(querry); 
-    console.log('Table is successfully created', res.rows[0]); 
-    } catch (err) { 
-    console.log(err); 
-    } finally { 
-    client.close(); 
-    } 
+client.connect((err)=>{
+client.query(querry,(err,res)=>{
+    console.log(err?err.stack:res.rows[0])
+    client.end
+})
+})
+
+
+
+//try {     
+//    const res = await client.query(querry); 
+//    console.log('Table is successfully created', res.rows[0]); 
+//    } catch (err) { 
+//    console.log(err); 
+//    } finally { 
+//    client.close(); 
+//    } 
 
 
 
