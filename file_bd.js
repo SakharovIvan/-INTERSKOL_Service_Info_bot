@@ -22,18 +22,17 @@ CREATE TABLE SparePartmas (
 VALUES ('hello','im warking','qwerty');
 SELECT * FROM SparePartmas;
 `
-
-client.query(query, (err, res) => { 
-    if (err) { 
-    console.error(err); 
-    return; 
-    } 
+async ()=>{
+try { 
+await client.query(query); 
     console.log('Table is successfully created'); 
-    console.log(res)
-    client.end(); 
-    }); 
+    } catch (err) { 
+    console.log(err.stack); 
+    } finally { 
+    client.close(); 
+    } 
 
-
+}
 
 
 //
