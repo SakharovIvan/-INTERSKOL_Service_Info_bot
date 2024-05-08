@@ -73,7 +73,7 @@ const start = async()=>{
     const table = 'sparepartmas'
     const tableRow = 'sp, name, tools'
     let row
-    
+    await client.connect()
     await client.query(deleteTable)
     await client.query(createTable)
 
