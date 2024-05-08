@@ -41,9 +41,9 @@ const promises = masData.map((id)=>{
     masSP.push(sp_info)
 
 })
-await Promise.all(promises)
-.then((data)=>data.filter((datasp)=>datasp.sp===findSP))
-return masSP
+const newMas = await Promise.all(promises)
+return newMas.filter((datasp)=>datasp.sp===findSP)
+
 }
 //
 //const start = async () =>{
