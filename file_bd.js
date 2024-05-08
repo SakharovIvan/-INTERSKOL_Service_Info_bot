@@ -12,7 +12,7 @@ const client = new Client  ({
 })
 
 const createTable = `
-CREATE TABLE SparePartmas ( 
+CREATE TABLE sparepartmas ( 
     id bigint GENERATED ALWAYS AS IDENTITY,
     sp VARCHAR(50),
     name VARCHAR(150),
@@ -24,7 +24,7 @@ const pgRow = `INSERT INTO ${table} (${tableRow}) VALUES ${row};`
 return pgRow
 }
 
-const deleteTable = `DROP TABLE SparePartmas;`
+const deleteTable = `DROP TABLE sparepartmas;`
 
 //client.connect((err)=>{
 //client.query(querry,(err,res)=>{
@@ -70,7 +70,7 @@ return masSP
 const start = async()=>{
     const massp = await makeFromFileSparePartArray()
     console.log(massp[2])
-    const table = 'SparePartmas'
+    const table = 'sparepartmas'
     const tableRow = 'sp, name, tools'
     let row
     
