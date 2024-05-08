@@ -73,13 +73,10 @@ const start = async()=>{
     const table = 'SparePartmas'
     const tableRow = 'sp, name, tools'
     let row
-    try{
+    
     await client.query(deleteTable)
     await client.query(createTable)
-    console.log('Old table deleted, new created')
-}catch(err){
-    console.log('Cant delete|create table',err)
-}
+
 
 for (let sp_info of massp){
     row = `${sp_info["sp"]}, ${sp_info["name"]}, ${sp_info["tools"]},`
