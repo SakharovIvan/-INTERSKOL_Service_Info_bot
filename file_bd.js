@@ -1,6 +1,7 @@
 const fs = require('fs')
 const util = require('util') 
 const {Client} = require('pg');
+const cli = require('nodemon/lib/cli');
 
 
 const client = new Client  ({
@@ -73,9 +74,16 @@ const start = async()=>{
     const table = 'sparepartmas'
     const tableRow = 'sp, name, tools'
     let row
-    await client.connect()
-    await client.query(deleteTable)
-    await client.query(createTable)
+    client.connect((err)=>{
+        client.query(deleteTable,(err,res)=>{
+            client.query(createTable,()=>{
+                console.log('old querry deleted and created new')
+               client.end 
+            })
+        })
+        
+    })
+    
 
 for (let sp_info of massp){
     row = `${sp_info["sp"]}, ${sp_info["name"]}, ${sp_info["tools"]},`
