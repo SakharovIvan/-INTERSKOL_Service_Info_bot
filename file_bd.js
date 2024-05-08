@@ -1,5 +1,6 @@
 //const fs = require('fs')
 //const util = require('util') 
+import pg from 'pg'
 const {Client} = require('pg');
 
 
@@ -11,7 +12,7 @@ const client = new Client  ({
     PGPORT:'5432',
 })
 
-const query = `
+const querry = `
 CREATE TABLE SparePartmas ( 
     id bigint GENERATED ALWAYS AS IDENTITY,
     sp VARCHAR(50),
@@ -22,18 +23,18 @@ CREATE TABLE SparePartmas (
 VALUES ('hello','im warking','qwerty');
 SELECT * FROM SparePartmas;
 `
-async ()=>{
-try { 
-    await client.connect()
-    await client.query(query); 
-    console.log('Table is successfully created'); 
+
+await client.connect()
+try {     
+    const res = await client.query(querry); 
+    console.log('Table is successfully created', res.rows[0]); 
     } catch (err) { 
-    console.log(err.stack); 
+    console.log(err); 
     } finally { 
     client.close(); 
     } 
 
-}
+
 
 
 //
