@@ -18,6 +18,9 @@ CREATE TABLE SparePartmas (
     name VARCHAR(150),
     tools text
     );
+    INSERT INTO SparePartmas (sp,name,tools)
+VALUES ('hello','im warking','qwerty');
+SELECT * FROM SparePartmas
 `
 
 client.query(query, (err, res) => { 
@@ -26,6 +29,7 @@ client.query(query, (err, res) => {
     return; 
     } 
     console.log('Table is successfully created'); 
+    console.log(res)
     client.end(); 
     }); 
 
