@@ -1,6 +1,6 @@
 //const fs = require('fs')
 //const util = require('util') 
-import pg from 'pg'
+
 const {Client} = require('pg');
 
 
