@@ -77,10 +77,10 @@ const start = async()=>{
     await client.query(deleteTable)
     await client.query(createTable)
 
-
 for (let sp_info of massp){
     row = `${sp_info["sp"]}, ${sp_info["name"]}, ${sp_info["tools"]},`
     client.query(makeRow(table,tableRow,row))
+    console.log(sp_info)
 }
 
 
