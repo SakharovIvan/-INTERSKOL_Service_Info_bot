@@ -21,7 +21,7 @@ CREATE TABLE sparepartmas (
     );
 `
 const makeRow = (table, tableRow, row)=>{
-const pgRow = `INSERT INTO ${table} (${tableRow}) VALUES ${row};`
+const pgRow = `INSERT INTO ${table} (${tableRow}) VALUES (${row});`
 return pgRow
 }
 
@@ -86,7 +86,7 @@ const start = async()=>{
             row = `'${sp_info["sp"]}', '${sp_info["name"]}', '${sp_info["tool"]}'`
             //console.log(row)
             try{
-            await client.query(makeRow(table,tableRow,row.toString()))
+            await client.query(makeRow(table,tableRow,row))
         }catch(err){
             console.log(err)
         }
