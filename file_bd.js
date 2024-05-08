@@ -1,15 +1,35 @@
 const fs = require('fs')
 const util = require('util') 
-//const {SparePart} = require('pg');
+const {Client } = require('pg');
 //const { database, password } = require('pg/lib/defaults');
 
-//const db = new SparePart ({
-//    user:'root',
-//    host:'192.168.0.74',
-//    database: 'SpareParts_bd',
-//    password: 'root',
-//    port:'5432'
-//})
+const db = new Client  ({
+    user:'root',
+    host:'192.168.0.74',
+    database: 'SpareParts_bd',
+    password: 'root',
+    port:'5432'
+})
+
+const query = `
+CREATE TABLE SparePart ( 
+    id bigint GENERATED ALWAYS AS IDENTITY,
+    sp VARCHAR(50),
+    name VARCHAR(150),
+    tools text
+    );
+`
+
+const createTable = async()=>{
+    try { 
+        await db.query(query); 
+        return console.log('Table is successfully created'); 
+        } catch (err) { 
+        console.log(err.stack); 
+        } finally { 
+        db.close(); 
+        } 
+}
 
 const RE_EOL = /\r?\n/;
 const TAB =/\t/
@@ -25,11 +45,10 @@ class SP  {
 }
 
 
-const makeFromFileBD = async (findSP)=> {
+const makeFromFileBD = async ()=> {
 const readFile = util.promisify(fs.readFile)
 const fileData = await readFile('./SP-ToolsUTF-8.txt', 'utf-8')
 const masData = fileData.split(RE_EOL)
-
 const masSP=[]
 const promises = masData.map((id)=>{
     let sp_info = new SP(id.split(TAB))
@@ -41,41 +60,12 @@ const promises = masData.map((id)=>{
     masSP.push(sp_info)
 
 })
-const newMas = await Promise.all(promises)
-return newMas.filter((datasp)=>datasp.sp===findSP)
-
+await Promise.all(promises)
+return masSP
 }
-//
-//const start = async () =>{
-//    const massp = await makeFromFileBD()
-//
-//    try {
-//        await db.connect()
-//        console.log('Good BD connecton')
-//    }
-//    catch (e){
-//        console.log('No BD connecton', e)
-//    }
-//
-//    console.log(massp[8])
-//    let id=1
-//    massp.map(async (mas_sp_info)=>{
-//        let spmas = mas_sp_info['sp']
-//        let toolsmas = mas_sp_info['tool']
-//        let namemas = mas_sp_info['name']
-//        let sparePartID 
-//        try {
-//            await SparePart.create({id})
-//            sparePartID = await SparePart.findOne({id})
-//            sparePartID.sp = spmas
-//            sparePartID.tools = toolsmas
-//            sparePartID.name = namemas
-//            idm+=1
-//        }catch(e){
-//        console.log(`зч не записана в бд ${spmas}`,e)
-//        }       
-//    })
-//return
-//}
-//
-module.exports = makeFromFileBD
+
+try {
+    createTable()
+}catch(e){
+    console.log(e)
+}
