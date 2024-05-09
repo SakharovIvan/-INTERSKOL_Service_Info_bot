@@ -5,7 +5,7 @@ const sequelize = require('./bd')
 const UserModel = require('./models')
 //const SparePartModel = require('./SPmodel');
 //const findSP = require('./file_bd')
-import {findMatNoSP} from './file_bd'
+const findMatNoSP = require ('./file_bd')
 
 const spCheck = async()=>{
     bot.on('message', async msg=>{
