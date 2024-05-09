@@ -11,7 +11,8 @@ const spCheck = async()=>{
     bot.on('message', async msg=>{
         //await bot.sendMessage(chatID, `Введите информацию о инструменте`)
         const text = msg.text
-        return bot.sendMessage(chatID, `Найдена следующая информация ${findSP(text)}`)
+        const info = await findMatNoSP(text)
+        return bot.sendMessage(chatID, `Найдена следующая информация ${info}`)
            
     })
 }
