@@ -46,12 +46,16 @@ const makeFromFileSparePartArray = async () => {
   const masSP = [];
   const promises = masData.map((id) => {
     let sp_info = new SP(id.split(TAB));
+    let check = false
     masSP.forEach((id) => {
       if (id.sp == sp_info.sp) {
-       return id.addTool(sp_info.tool[0]);
+        id.addTool(sp_info.tool[0]);
+       check =true
       }
     });
-    return masSP.push(sp_info);
+    if (check !== true ){
+     masSP.push(sp_info);  
+    }
   });
   await Promise.all(promises);
 
@@ -81,7 +85,7 @@ const start = async () => {
     }
     try{
        const filter = await client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
-        console.log(filter)
+        console.log(filter.tools)
     }catch(err){
         console.log('cant create filter',err)
     }
