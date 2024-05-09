@@ -19,9 +19,7 @@ const findMatNoSP = (matNoSp)=>{
 
        const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
-       // console.log(data, err);
         client.end();  
-        console.log(data)
         return data
     });
 //console.log([result['sp'], result['tool'], result['name']])

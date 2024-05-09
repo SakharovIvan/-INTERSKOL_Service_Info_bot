@@ -49,9 +49,10 @@ const makeFromFileSparePartArray = async () => {
     masSP.forEach((id) => {
       if (id.sp == sp_info.sp) {
         id.addTool(sp_info.tool[0]);
+      } else {
+        masSP.push(sp_info);
       }
     });
-    masSP.push(sp_info);
   });
   await Promise.all(promises);
   return masSP;
