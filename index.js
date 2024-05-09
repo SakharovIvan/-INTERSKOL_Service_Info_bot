@@ -3,12 +3,17 @@ const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const findMatNoSP = require ('./sp_find')
 
+const replaceAll=(str, find, replace)=>{
+    return str.replace(new RegExp(find, 'g'), replace);
+  }
+
 const spCheck = async()=>{
     bot.on('message', async msg=>{
         const text = msg.text
         const chatID = msg.chat.id
         const info = await findMatNoSP(text)
-        const spToolsInfo = info['tools'].replace(',','\n')
+        const spToolsInfo = replaceAll(info['tools'],',','\n')
+        //const spToolsInfo = info['tools'].replace(',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
         console.log(spToolsInfo)
         bot.sendMessage(chatID, `Найдена следующая информация\n ${spMessage}`)
