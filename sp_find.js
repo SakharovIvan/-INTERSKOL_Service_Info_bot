@@ -12,7 +12,7 @@ const client = new Client({
     port: "5432",
   });
   
-const findMatNoSP = (matNoSp)=>{
+const findMatNoSP = (matNoSp) =>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
     try {
@@ -23,7 +23,8 @@ const findMatNoSP = (matNoSp)=>{
     }
        const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
-        client.end();  
+        client.end();
+        console.log(data)
         return data
     });
 console.log([result['sp'], result['tool'], result['name']])
