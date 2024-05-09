@@ -1,3 +1,3 @@
 const findMatNoSP = require('./file_bd.js')
 
-console.log(findMatNoSP('00.02.04.04.01'))
+findMatNoSP('00.02.04.04.01',(err,data)=>console.log(data)) 
