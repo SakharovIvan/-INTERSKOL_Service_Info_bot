@@ -79,7 +79,12 @@ const start = async () => {
         console.log(err);
       }
     }
-    await client.query(`SELECT * FROM sparepartmas WHERE '00.02.04.04.01';`)
+    try{
+        await client.query(`SELECT * FROM sparepartmas WHERE '00.02.04.04.01';`)
+    }catch(err){
+        console.log('cant create filter',err)
+    }
+    
     await client.end();
   }
 };
