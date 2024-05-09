@@ -12,25 +12,21 @@ const client = new Client({
     port: "5432",
   });
   
-const findMatNoSP = async (matNoSp)=>{
+const findMatNoSP =  (matNoSp)=>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
-    await client.connect();
-    try{
-       const result = await client.query(sqlFilter(table, filterParam))
-       console.log([result['sp'], result['tool'], result['name']])
+     client.connect();
+
+       const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
+        if (err) 
+            throw new Error(err);
+        console.log(data, err);
+        client.end();  
+    });
        return [result.sp, result.tool, result.name]
-    } catch (err){
-        return console.log(err)
-    }
+
 }
 
-findMatNoSP('00.02.04.04.01',(err,data)=>{
-    try {
-        console.log(data)
-    } catch (err){
-        console.log(err)
-    }
-}
-    ) 
+console.log(findMatNoSP('00.02.04.04.01'))
+
 module.exports  = findMatNoSP
