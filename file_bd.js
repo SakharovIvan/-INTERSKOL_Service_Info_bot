@@ -55,12 +55,12 @@ const makeFromFileSparePartArray = async () => {
   });
   await Promise.all(promises);
 
-  await console.log(masSP.filter((obj)=>{obj['sp']==='00.02.04.04.01'}));
   return masSP;
 };
 
 const start = async () => {
   const massp = await makeFromFileSparePartArray();
+  console.log(massp.filter((obj)=>{obj['sp']==='00.02.04.04.01'}))
   const table = "sparepartmas";
   const tableRow = "sp, name, tools";
   let row;
