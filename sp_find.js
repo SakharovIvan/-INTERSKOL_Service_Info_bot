@@ -24,11 +24,10 @@ const findMatNoSP = async (matNoSp) =>{
        const result = await client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
         client.end();
-        console.log(data)
         return data
     });
 //console.log([result['sp'], result['tool'], result['name']])
-return result[0]
+return result.rows[0]
 }
 
 console.log(findMatNoSP('00.02.04.04.01'))
