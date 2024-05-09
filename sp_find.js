@@ -15,13 +15,18 @@ const client = new Client({
 const findMatNoSP = (matNoSp)=>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
-     client.connect();
+    try {
+        client.connect();
+        console.log('CLient connected')
+    }catch(err){
+        console.log('CLient didnt connected',err)
+    }
        const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
         client.end();  
         return data
     });
-//console.log([result['sp'], result['tool'], result['name']])
+console.log([result['sp'], result['tool'], result['name']])
 return  [result]
 
 }

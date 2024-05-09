@@ -54,13 +54,11 @@ const makeFromFileSparePartArray = async () => {
     return masSP.push(sp_info);
   });
   await Promise.all(promises);
-  console.log(masSP[10])
   return masSP;
 };
 
 const start = async () => {
   const massp = await makeFromFileSparePartArray();
-  //console.log(massp[2]);
   const table = "sparepartmas";
   const tableRow = "sp, name, tools";
   let row;
