@@ -48,11 +48,10 @@ const makeFromFileSparePartArray = async () => {
     let sp_info = new SP(id.split(TAB));
     masSP.forEach((id) => {
       if (id.sp == sp_info.sp) {
-        id.addTool(sp_info.tool[0]);
-      } else {
-        masSP.push(sp_info);
+       return id.addTool(sp_info.tool[0]);
       }
     });
+    return masSP.push(sp_info);
   });
   await Promise.all(promises);
   return masSP;

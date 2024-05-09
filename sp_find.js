@@ -16,7 +16,6 @@ const findMatNoSP = (matNoSp)=>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
      client.connect();
-
        const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
         client.end();  
