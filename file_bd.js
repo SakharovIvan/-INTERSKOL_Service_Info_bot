@@ -80,7 +80,8 @@ const start = async () => {
       }
     }
     try{
-        console.log(client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`))
+       const filter = client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
+        console.log(filter)
     }catch(err){
         console.log('cant create filter',err)
     }
