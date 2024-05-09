@@ -54,6 +54,8 @@ const makeFromFileSparePartArray = async () => {
     return masSP.push(sp_info);
   });
   await Promise.all(promises);
+
+  console.log(masSP.filter((obj)=>{obj['sp']==='00.02.04.04.01'}));
   return masSP;
 };
 
@@ -66,6 +68,7 @@ const start = async () => {
   try {
     await client.query(deleteTable);
     await client.query(createTable);
+    console.log('Old Table deleted, new created')
   } catch (err) {
     console.log(err);
   } finally {
