@@ -2,7 +2,7 @@ const { Client } = require("pg");
 //const findMatNoSP = require('./file_bd.js')
 
 
-const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param}`
+const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param};`
 
 const client = new Client({
     user: "root",
