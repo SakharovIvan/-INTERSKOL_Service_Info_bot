@@ -1,3 +1,4 @@
+const cli = require("nodemon/lib/cli");
 const { Client } = require("pg");
 //const findMatNoSP = require('./file_bd.js')
 
@@ -28,6 +29,7 @@ const result = await client.query(sqlFilter(table, filterParam))//,(err,data)=> 
 //           return data
 //        });
 //console.log([result['sp'], result['tool'], result['name']])
+client.end()
 return result.rows[0]
 }
 
