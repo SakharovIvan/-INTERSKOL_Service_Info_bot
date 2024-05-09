@@ -25,7 +25,7 @@ const findMatNoSP = (matNoSp)=>{
         return data
     });
 //console.log([result['sp'], result['tool'], result['name']])
-return  [result['sp'], result['tool'], result['name']]
+return  [result]
 
 }
 
