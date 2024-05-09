@@ -85,7 +85,7 @@ const start = async () => {
     }
     try{
        const filter = await client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
-        console.log(filter.rows.tools)
+        console.log(filter.rows)
     }catch(err){
         console.log('cant create filter',err)
     }
