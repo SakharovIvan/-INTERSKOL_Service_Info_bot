@@ -17,14 +17,15 @@ const findMatNoSP = (matNoSp)=>{
     const table = "sparepartmas";
      client.connect();
 
-       client.query(sqlFilter(table, filterParam),(err,data)=> {
+       const result = client.query(sqlFilter(table, filterParam),(err,data)=> {
         if (err) throw new Error(err);
        // console.log(data, err);
         client.end();  
-        console.log([data['sp'], data['tool'], data['name']])
-        return [data['sp'], data['tool'], data['name']]
+        console.log(data)
+        return data
     });
-       
+console.log([result['sp'], result['tool'], result['name']])
+return  [result['sp'], result['tool'], result['name']]
 
 }
 
