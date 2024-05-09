@@ -9,7 +9,7 @@ const findMatNoSP = require ('./file_bd')
 
 const spCheck = async()=>{
     bot.on('message', async msg=>{
-        await bot.sendMessage(chatID, `Введите информацию о инструменте`)
+        //await bot.sendMessage(chatID, `Введите информацию о инструменте`)
         const text = msg.text
         return bot.sendMessage(chatID, `Найдена следующая информация ${findSP(text)}`)
            
@@ -46,7 +46,7 @@ bot.on('message', async msg =>{
         return spCheck()
     }
 
-    return bot.sendMessage(chatID, `Найдена следующая информация ${findMatNoSP(text)}`)
+    return bot.sendMessage(chatID, `Я тебя не понимаю`)
 } )
 
 
