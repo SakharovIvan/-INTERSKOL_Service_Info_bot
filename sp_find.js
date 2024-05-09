@@ -1,6 +1,5 @@
-const cli = require("nodemon/lib/cli");
+
 const { Client } = require("pg");
-//const findMatNoSP = require('./file_bd.js')
 
 
 const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param};`

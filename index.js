@@ -1,16 +1,12 @@
 const TelegramAPI = require('node-telegram-bot-api')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
-const sequelize = require('./bd')
-const UserModel = require('./models')
-//const SparePartModel = require('./SPmodel');
-//const findSP = require('./file_bd')
 const findMatNoSP = require ('./sp_find')
 
 const spCheck = async()=>{
     bot.on('message', async msg=>{
-        //await bot.sendMessage(chatID, `Введите информацию о инструменте`)
         const text = msg.text
+        const chatID = msg.chat.id
         const info = await findMatNoSP(text)
         console.log(info)
         return bot.sendMessage(chatID, `Найдена следующая информация ${info}`)
@@ -29,13 +25,6 @@ bot.on('message', async msg =>{
     const text = msg.text
     const chatID = msg.chat.id
 
-    try{
-        await UserModel.create({chatID})
-    }catch(e){
-        return bot.sendMessage(chatID,'Something going wrong with creating chatId model', e)
-    }
-    const user = await UserModel.findOne({chatID})
-    user.msg = text
     if (text === '/start'){
         return bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
     }
