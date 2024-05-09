@@ -9,7 +9,7 @@ const spCheck = async()=>{
         const chatID = msg.chat.id
         const info = await findMatNoSP(text)
         console.log(info['tools'])
-        return bot.sendMessage(chatID, `Найдена следующая информация ${info[tools]}`)
+        return bot.sendMessage(chatID, `Найдена следующая информация ${info['tools']}`)
     })
 }
 
