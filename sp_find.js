@@ -30,6 +30,6 @@ const findMatNoSP = async (matNoSp) =>{
 return result.rows[0]
 }
 
-console.log(findMatNoSP('00.02.04.04.01'))
+console.log(await findMatNoSP('00.02.04.04.01'))
 
 module.exports  = findMatNoSP
