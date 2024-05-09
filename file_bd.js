@@ -94,9 +94,10 @@ const findMatNoSP = async (matNoSp)=>{
     await client.connect();
     try{
        const result = await client.query(sqlFilter(table, filterParam))
+       return [result.sp, result.tool, result.name]
     } catch (err){
         return console.log(err)
     }
-    return [result.sp, result.tool, result.name]
+    
 }
-export {findMatNoSP}
+module.exports  = findMatNoSP
