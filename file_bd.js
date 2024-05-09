@@ -60,7 +60,7 @@ const makeFromFileSparePartArray = async () => {
 
 const start = async () => {
   const massp = await makeFromFileSparePartArray();
-  console.log(massp.filter((obj)=>{obj['sp']==='00.02.04.04.01'}))
+  console.log(massp.filter((obj)=>obj.sp =='00.02.04.04.01'))
   const table = "sparepartmas";
   const tableRow = "sp, name, tools";
   let row;
@@ -74,6 +74,7 @@ const start = async () => {
   } finally {
     for (let sp_info of massp) {
       row = `'${sp_info["sp"]}', '${sp_info["name"]}', '${sp_info["tool"]}'`;
+      console.log(row)
       try {
         await client.query(makeRow(table, tableRow, row));
       } catch (err) {
