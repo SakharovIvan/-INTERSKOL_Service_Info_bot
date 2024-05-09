@@ -59,7 +59,7 @@ const makeFromFileSparePartArray = async () => {
 
 const start = async () => {
   const massp = await makeFromFileSparePartArray();
-  console.log(massp[2]);
+  //console.log(massp[2]);
   const table = "sparepartmas";
   const tableRow = "sp, name, tools";
   let row;
@@ -84,19 +84,3 @@ const start = async () => {
 
 start();
 
-const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param}`
-
-const findMatNoSP = async (matNoSp)=>{
-    const filterParam = `sp = '${matNoSp}'`
-    const table = "sparepartmas";
-   // await client.connect();
-    try{
-       const result = await client.query(sqlFilter(table, filterParam))
-       return [result.sp, result.tool, result.name]
-    } catch (err){
-        return console.log(err)
-    }
-    
-}
-
-module.exports  = findMatNoSP
