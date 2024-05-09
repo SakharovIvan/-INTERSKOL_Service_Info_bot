@@ -51,4 +51,4 @@ bot.on('message', async msg =>{
 
 
 
-start()
+
