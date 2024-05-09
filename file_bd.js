@@ -54,6 +54,7 @@ const makeFromFileSparePartArray = async () => {
     return masSP.push(sp_info);
   });
   await Promise.all(promises);
+  console.log(masSP[10])
   return masSP;
 };
 
