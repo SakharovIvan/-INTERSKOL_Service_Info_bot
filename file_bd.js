@@ -83,12 +83,12 @@ const start = async () => {
         console.log(err);
       }
     }
-    try{
-       const filter = await client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
-        console.log(filter.rows[0].tools)
-    }catch(err){
-        console.log('cant create filter',err)
-    }
+   // try{
+   //    const filter = await client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
+   //     console.log(filter.rows[0].tools)
+   // }catch(err){
+   //     console.log('cant create filter',err)
+   // }
     
     await client.end();
   }
