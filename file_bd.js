@@ -71,9 +71,7 @@ const start = async () => {
     console.log(err);
   } finally {
     for (let sp_info of massp) {
-      //console.log(sp_info)
       row = `'${sp_info["sp"]}', '${sp_info["name"]}', '${sp_info["tool"]}'`;
-      //console.log(row)
       try {
         await client.query(makeRow(table, tableRow, row));
       } catch (err) {
@@ -91,7 +89,7 @@ const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param}`
 const findMatNoSP = async (matNoSp)=>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
-    await client.connect();
+   // await client.connect();
     try{
        const result = await client.query(sqlFilter(table, filterParam))
        return [result.sp, result.tool, result.name]
@@ -100,4 +98,5 @@ const findMatNoSP = async (matNoSp)=>{
     }
     
 }
+
 module.exports  = findMatNoSP
