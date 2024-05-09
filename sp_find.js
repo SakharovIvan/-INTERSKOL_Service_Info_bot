@@ -12,7 +12,7 @@ const client = new Client({
     port: "5432",
   });
   
-const findMatNoSP =  (matNoSp)=>{
+const findMatNoSP = (matNoSp)=>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
      client.connect();
@@ -21,6 +21,7 @@ const findMatNoSP =  (matNoSp)=>{
         if (err) throw new Error(err);
        // console.log(data, err);
         client.end();  
+        console.log([data['sp'], data['tool'], data['name']])
         return [data['sp'], data['tool'], data['name']]
     });
        
