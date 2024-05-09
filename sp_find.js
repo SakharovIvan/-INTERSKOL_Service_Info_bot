@@ -31,6 +31,6 @@ const result = await client.query(sqlFilter(table, filterParam))//,(err,data)=> 
 return result.rows[0]
 }
 
-findMatNoSP('00.02.04.04.01')
-.then(console.log)
+//findMatNoSP('00.02.04.04.01')
+//.then(console.log)
 module.exports  = findMatNoSP
