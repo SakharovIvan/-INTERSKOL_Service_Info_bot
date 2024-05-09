@@ -4,7 +4,8 @@ const bot = new TelegramAPI(token,{polling:true})
 const sequelize = require('./bd')
 const UserModel = require('./models')
 //const SparePartModel = require('./SPmodel');
-const findSP = require('./file_bd')
+//const findSP = require('./file_bd')
+import {findMatNoSP} from './file_bd'
 
 const spCheck = async()=>{
     bot.on('message', async msg=>{
@@ -13,18 +14,8 @@ const spCheck = async()=>{
         return bot.sendMessage(chatID, `Найдена следующая информация ${findSP(text)}`)
            
     })
-
-    
 }
 
-const start = async ()=>{
-try {
-    await sequelize.authenticate()
-    await sequelize.sync()
-}
-catch (e){
-    console.log('No BD connecton', e)
-}
 
 bot.setMyCommands ([
     {command: '/start', description: 'Начальное приветствие'},
@@ -55,9 +46,9 @@ bot.on('message', async msg =>{
         return spCheck()
     }
 
-    return bot.sendMessage(chatID, `Найдена следующая информация ${await findSP(text)}`)
+    return bot.sendMessage(chatID, `Найдена следующая информация ${await findMatNoSP(text)}`)
 } )
 
-}
+
 
 start()
