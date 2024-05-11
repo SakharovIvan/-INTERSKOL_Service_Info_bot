@@ -56,9 +56,9 @@ const start = async () => {
       if (text == SP_INFO) {
         const sparePartRequest = text.replace('/sp_info ')
         //await spCheck(chatID,text)
-        return spCheck(chatID,sparePartRequest)
+        return 
       }
-      return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
+      return spCheck(chatID,sparePartRequest)
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
     }
