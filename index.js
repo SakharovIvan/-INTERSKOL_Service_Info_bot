@@ -10,9 +10,11 @@ const replaceAll=(str, find, replace)=>{
 const spCheck = async(chatID)=>{
     bot.on('callback_query', async msg=>{
         const text = msg.text
+        console.log(text)
 //        const chatID = msg.chat.id
         try{
         const info = await findMatNoSP(text)
+        console.log(info)
         //if (info===undefined){return await bot.sendMessage(chatID, `Информация по артикулу не найден`)}
         const spToolsInfo = replaceAll(info['tools'],',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
