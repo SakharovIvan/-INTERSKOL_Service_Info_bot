@@ -11,10 +11,16 @@ const spCheck = async()=>{
     bot.on('message', async msg=>{
         const text = msg.text
         const chatID = msg.chat.id
+        try{
         const info = await findMatNoSP(text)
+        if (info=undefined){return bot.sendMessage(chatID, `Информация по артикулу не найден`)}
         const spToolsInfo = replaceAll(info['tools'],',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
         bot.sendMessage(chatID, `Найдена следующая информация\n ${spMessage}`)
+    }catch(err){
+        console.log(err)
+    }
+
         return 
     })
 }
@@ -30,7 +36,7 @@ bot.setMyCommands ([
 bot.on('message', async msg =>{
     const text = msg.text
     const chatID = msg.chat.id
-
+    try{
     if (text === '/start'){
         await bot.sendPhoto(chatID, './INTERSKOL_logo.jpg')
         await bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
@@ -45,6 +51,7 @@ bot.on('message', async msg =>{
         await spCheck()
         return 
     }
+}catch(err){ console.log(err)}
 
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
 } )
