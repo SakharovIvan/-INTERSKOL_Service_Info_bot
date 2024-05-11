@@ -53,7 +53,7 @@ const start = async () => {
         Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
         );
       }
-      if (text == new RegExp("/sp_info [0-9.]+")) {
+      if (text == new RegExp("\/sp_info [0-9.]+")) {
         const sparePartRequest = text.replace('/sp_info ')
         //await spCheck(chatID,text)
         return spCheck(chatID,sparePartRequest)
