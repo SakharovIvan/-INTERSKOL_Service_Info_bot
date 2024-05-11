@@ -8,16 +8,16 @@ const replaceAll=(str, find, replace)=>{
   }
 
   chats = {}
-const spCheck = async()=>{
-    const spMessag =    bot.on('message',async (msg)=>{
-        const text = msg.text;
+const spCheck = async(chatID,text)=>{
+//bot.on('message',async (msg)=>{
+ //       const text = msg.text;
         const info = await findMatNoSP(text)
         const spToolsInfo = replaceAll(info['tools'],',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
         console.log('Вышлти из спчека спчек')
-        return spMessage
-    })
-    await bot.sendMessage(chatID, spMessag)
+  //      return spMessage
+ //   })
+    return await bot.sendMessage(chatID, spMessage)
 }
 
 const start = async () => {
@@ -51,7 +51,7 @@ const start = async () => {
         bot.sendMessage(chatID, `Введите артикул запчасти`)
         return spCheck()
       }
-      return bot.sendMessage(chatID, `Я тебя не понимаю`);
+      return bot.sendMessage(chatID, spCheck(chatID,text));
     } catch (err) {
       console.log(err);
     }
