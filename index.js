@@ -53,8 +53,9 @@ bot.on('message', async msg =>{
         Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`)
     }
     if (text === '/sp_info'){
-        await bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        await spCheck(chatID)
+        bot.sendMessage(chatID, `Ведите артикул запчасти`)
+        .then(()=>spCheck(chatID))
+        .catch((err)=>console.log(err))
         return 
     }
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
