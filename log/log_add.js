@@ -19,10 +19,12 @@ const client = new Pool({
 //);
 
 const logADD = (chatID, cli, text)=>{
-
+try{
+    client.query(`INSERT INTO clientlog (chatid, cli, text) VALUES (${chatID},${cli},${text});`)
+    console.log('Cli Log added')
+}catch{throw Error}
         //await client.connect();
-        client.query(`INSERT INTO clientlog (chatid, cli, text) VALUES (${chatID},${cli},${text});`)
-        console.log('Cli Log added')
+   
        // await client.end();
    // }catch(err){console.log(err)}
 
