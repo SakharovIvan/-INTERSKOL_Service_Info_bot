@@ -1,15 +1,15 @@
 
-const { Client } = require("pg");
+const { Pool } = require("pg");
 
 
 const sqlFilter =(table, param) => `SELECT * FROM ${table} WHERE ${param};`
 
-const client = new Client({
+const client = new Pool({
     user: "root",
     host: "192.168.0.74",
     database: "SpareParts_bd",
     password: "root",
-    port: "5432",
+    port: "5432"
   });
   
 const findMatNoSP = async (matNoSp) =>{
@@ -17,7 +17,6 @@ const findMatNoSP = async (matNoSp) =>{
     const table = "sparepartmas";
     let result
 try{
-    await client.end()
     await client.connect()
     console.log('CLient connected')
 }catch(err){
