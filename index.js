@@ -8,12 +8,16 @@ const replaceAll=(str, find, replace)=>{
   }
 
   chats = {}
-const spCheck = async(text)=>{
+const spCheck = async()=>{
+    const spMessag =    bot.on('message',async (msg)=>{
+        const text = msg.text;
         const info = await findMatNoSP(text)
         const spToolsInfo = replaceAll(info['tools'],',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
         console.log('Вышлти из спчека спчек')
         return spMessage
+    })
+    await bot.sendMessage(chatID, spMessag)
 }
 
 const start = async () => {
@@ -44,8 +48,8 @@ const start = async () => {
         );
       }
       if (text === "/sp_info") {
-        bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        return 
+        bot.sendMessage(chatID, `Введите артикул запчасти`)
+        return spCheck()
       }
       return bot.sendMessage(chatID, `Я тебя не понимаю`);
     } catch (err) {
@@ -54,13 +58,6 @@ const start = async () => {
   });
 
 
-  bot.on('callback_query', async msg=>{
-    const text = msg.text;
-    const chatID = msg.chat.id;
-    const answer = spCheck(text)
-    bot.sendMessage(chatID,answer)
-   
-  })
 };
 
 start()
