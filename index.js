@@ -55,9 +55,11 @@ bot.on('message', async msg =>{
     if (text === '/sp_info'){
         bot.sendMessage(chatID, `Ведите артикул запчасти`)
         .then(()=>spCheck(chatID))
+        .then(()=>console.log('Я не буду работать1'))
+        .then(()=>{return})
         .catch((err)=>console.log(err))
-        console.log('Я не буду работать')
-        return 
+        console.log('Я не буду работать2')
+        
     }
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
 
