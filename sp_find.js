@@ -15,18 +15,11 @@ const client = new Pool({
 const findMatNoSP = async (matNoSp) =>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
-     
-//try{
-//    const pool = await client.connect()
-//    console.log('CLient connected')
-//}catch(err){
-//console.log('Проблема при подключении',err)
-//}
 
     try{
         const pool = await client.connect()
         console.log('CLient connected')
-        let result = await client.query(sqlFilter(table, filterParam))
+        let result = await client.query(`SELECT * FROM ${table} WHERE ${filterParam};`)
         console.log('Filtered table', result.rows[0])
         pool.end().then(()=>console.log('Client disconected'))
         return result.rows[0]
