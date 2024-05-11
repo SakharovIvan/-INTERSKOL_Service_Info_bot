@@ -21,12 +21,13 @@ const findMatNoSP = async (matNoSp) =>{
     }catch(err){
         console.log('CLient didnt connected',err)
     }
+
 try {
 const result = await client.query(sqlFilter(table, filterParam))
 client.end()
+return result.rows[0]
 }catch (err){
     console.log (err)}
-return result.rows[0]
 }
 
 
