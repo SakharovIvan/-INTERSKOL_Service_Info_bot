@@ -58,7 +58,7 @@ const start = async () => {
       }
       return await bot.sendMessage(chatID, spCheck(chatID,text));
     } catch (err) {
-      console.log('проблема с обработкой сообщения',err);
+      console.log('проблема с обработкой сообщения',err,msg);
     }
   }
 );
