@@ -7,9 +7,9 @@ const replaceAll=(str, find, replace)=>{
     return str.replace(new RegExp(find, 'g'), replace);
   }
 
-const spCheck = async()=>{
-//    bot.on('message', async msg=>{
-//        const text = msg.text
+const spCheck = async(chatID)=>{
+    bot.on('callback_query', async msg=>{
+        const text = msg.text
 //        const chatID = msg.chat.id
         try{
         const info = await findMatNoSP(text)
@@ -23,7 +23,7 @@ const spCheck = async()=>{
     console.log('Вышлти из ботон спчек')
     await bot.sendMessage(chatID, `Для поиска другого артикула, введите команду \`/sp_info\``)
         return 
- //   })
+    })
     
 return 
 }
@@ -52,7 +52,7 @@ bot.on('message', async msg =>{
     }
     if (text === '/sp_info'){
         await bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        return spCheck()
+        return spCheck(chatID)
     }
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
 
