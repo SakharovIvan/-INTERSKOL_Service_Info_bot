@@ -10,7 +10,6 @@ const client = new Pool({
     database: "SpareParts_bd",
     password: "root",
     port: "5432",
-    connectionTimeoutMillis: 100,
   });
   
 const findMatNoSP = async (matNoSp) =>{
@@ -29,7 +28,7 @@ const findMatNoSP = async (matNoSp) =>{
         console.log('CLient connected')
         result = await client.query(sqlFilter(table, filterParam))
         pool.end().then(()=>console.log('Client disconected'))
-        console.log(result)
+        //console.log(result)
     }catch(err){
 console.log(err)
     }
@@ -38,6 +37,4 @@ console.log(err)
 return result.rows[0]
     }
 
-
-findMatNoSP('51.04.02.01.00').then(console.log)
 module.exports  = findMatNoSP
