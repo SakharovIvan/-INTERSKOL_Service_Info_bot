@@ -9,19 +9,21 @@ const replaceAll=(str, find, replace)=>{
 
   chats = {}
 const spCheck = async(chatID, text)=>{
+bot.onText(/+/,async ()=>{
+    try{
+        const info = await findMatNoSP(text)
+        console.log(info)
+        const spToolsInfo = await replaceAll(info['tools'],',','\n')
+        console.log(spToolsInfo)
+        const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
+        console.log('Вышлти из спчека спчек')
+        return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
+     }catch(err){
+        console.log('ПРоблема с спЧек ',err)
+     }
+    return console.log('spCheck ends')
+})
 
- try{
-    const info = await findMatNoSP(text)
-    console.log(info)
-    const spToolsInfo = await replaceAll(info['tools'],',','\n')
-    console.log(spToolsInfo)
-    const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-    console.log('Вышлти из спчека спчек')
-    return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
- }catch(err){
-    console.log('ПРоблема с спЧек ',err)
- }
-return console.log('spCheck ends')
 }
 
 const start = async () => {
@@ -57,7 +59,7 @@ const start = async () => {
         await spCheck(chatID,text)
         return 
       }
-      return await spCheck(chatID,text);
+      return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
     }
