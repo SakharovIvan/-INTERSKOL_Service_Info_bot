@@ -51,7 +51,7 @@ const start = async () => {
         bot.sendMessage(chatID, `Введите артикул запчасти`)
         return spCheck()
       }
-      return bot.sendMessage(chatID, spCheck(chatID,text));
+      return await bot.sendMessage(chatID, spCheck(chatID,text));
     } catch (err) {
       console.log(err);
     }
