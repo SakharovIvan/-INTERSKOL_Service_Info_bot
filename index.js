@@ -21,7 +21,7 @@ const spCheck = async(chatID, text)=>{
  }catch(err){
     console.log('ПРоблема с спЧек ',err)
  }
-return console.log('spCheck ends')
+return bot.sendMessage(chatID,`Такого я не нашел(((`)
 }
 
 const start = async () => {
