@@ -15,7 +15,7 @@ const spCheck = async(chatID, text)=>{
     const spToolsInfo = await replaceAll(info['tools'],',','\n')
     const spMessage =await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
     console.log('Вышлти из спчека спчек')
-    return await bot.sendMessage(chatID,await spMessage)
+    return await bot.sendMessage(chatID,`ВОт что нашел:\n${await spMessage}` )
  }catch(err){
     console.log(err)
  }
