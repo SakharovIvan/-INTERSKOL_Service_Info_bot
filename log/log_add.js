@@ -29,5 +29,6 @@ try{
    // }catch(err){console.log(err)}
 
 }
-logADD(1234,'Ivan','sometext')
+try{
+logADD(1234,'Ivan','sometext')}catch{throw Error}
 module.exports = logADD
