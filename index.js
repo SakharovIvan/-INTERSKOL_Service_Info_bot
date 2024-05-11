@@ -37,10 +37,11 @@ const start = async () => {
     const text = msg.text;
     const chatID = msg.chat.id;
     const username = msg.from.username
+    const time = msg.from.date
     //console.log(username)
     
     try {
-      logADD(chatID,username,text)
+      logADD(chatID,username,text,time)
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
         await bot.sendMessage(
