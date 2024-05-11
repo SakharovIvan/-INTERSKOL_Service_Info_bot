@@ -23,7 +23,7 @@ const spCheck = async(chatID, text)=>{
  }
 return console.log('spCheck ends')
 }
-
+const SP_INFO = /\/sp_info [0-9.]+/
 const start = async () => {
     console.log('start start')
   bot.setMyCommands([
@@ -36,7 +36,7 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
-    const SP_INFO = /\/sp_info [0-9.]+/
+    
     try {
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
