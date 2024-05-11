@@ -26,6 +26,7 @@ const findMatNoSP = async (matNoSp) =>{
 console.log(err)
     }finally{
         client.end()
+        .then(()=>console.log('отключились от сервера'))
     }
 //        client.connect()
 //        .then(()=>console.log('CLient connected'))
