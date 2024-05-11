@@ -54,10 +54,11 @@ bot.on('message', async msg =>{
         await spCheck()
         return 
     }
+    return bot.sendMessage(chatID, `Я тебя не понимаю`)
 }catch(err){ console.log(err)}
 
-    return bot.sendMessage(chatID, `Я тебя не понимаю`)
-} )
+} 
+)
 
 }
 
