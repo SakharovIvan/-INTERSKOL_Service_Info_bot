@@ -21,17 +21,13 @@ const findMatNoSP = async (matNoSp) =>{
     }catch(err){
         console.log('CLient didnt connected',err)
     }
-       
-const result = await client.query(sqlFilter(table, filterParam))//,(err,data)=> {
-//           if (err) throw new Error(err);
-//           client.end();
-//           return data
-//        });
-//console.log([result['sp'], result['tool'], result['name']])
+try {
+const result = await client.query(sqlFilter(table, filterParam))
 client.end()
+}catch (err){
+    console.log (err)}
 return result.rows[0]
 }
 
-//findMatNoSP('00.02.04.04.01')
-//.then(console.log)
+
 module.exports  = findMatNoSP
