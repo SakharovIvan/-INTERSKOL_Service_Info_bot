@@ -16,17 +16,22 @@ const findMatNoSP = async (matNoSp) =>{
     const filterParam = `sp = '${matNoSp}'`
     const table = "sparepartmas";
     let result
+try{
+    await client.connect()
+    console.log('CLient connected')
+}catch(err){
+console.log('Проблема при подключении',err)
+}
 
     try{
-        await client.connect()
-        console.log('CLient connected')
+        
         result = await client.query(sqlFilter(table, filterParam))
         console.log(result)
     }catch(err){
 console.log(err)
     }finally{
-        client.end()
-        .then(()=>console.log('отключились от сервера'))
+        await client.end()
+        //.then(()=>console.log('отключились от сервера'))
     }
 //        client.connect()
 //        .then(()=>console.log('CLient connected'))

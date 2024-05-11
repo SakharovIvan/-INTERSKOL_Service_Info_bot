@@ -12,8 +12,8 @@ const spCheck = async(chatID,text)=>{
 //bot.on('message',async (msg)=>{
  //       const text = msg.text;
         const info = await findMatNoSP(text)
-        const spToolsInfo = replaceAll(info['tools'],',','\n')
-        const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
+        const spToolsInfo = await replaceAll(info['tools'],',','\n')
+        const spMessage =await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
         console.log('Вышлти из спчека спчек')
   //      return spMessage
  //   })
