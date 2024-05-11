@@ -57,8 +57,8 @@ const start = async () => {
       }
       if (text === "/sp_info") {
         await bot.sendMessage(chatID, `Введите артикул запчасти`)
-        await spCheck(chatID)
-        return 
+        //await 
+        return spCheck(chatID)
       }
       return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
     } catch (err) {
