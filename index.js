@@ -53,10 +53,11 @@ const start = async () => {
         );
       }
       if (text === "/sp_info") {
-        bot.sendMessage(chatID, `Введите артикул запчасти`)
-        return spCheck()
+        await bot.sendMessage(chatID, `Введите артикул запчасти`)
+        await spCheck(chatID,text)
+        return 
       }
-      return await  spCheck(chatID,text);
+      return await spCheck(chatID,text);
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
     }
