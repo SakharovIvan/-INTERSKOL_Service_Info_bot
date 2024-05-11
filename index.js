@@ -36,7 +36,7 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
-    const SP_INFO = /\/sp_info +/
+    const SP_INFO = /\/sp_info [0-9,.]+/
     try {
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
