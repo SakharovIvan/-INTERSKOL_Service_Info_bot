@@ -17,6 +17,7 @@ const findMatNoSP = async (matNoSp) =>{
     const table = "sparepartmas";
     let result
 try{
+    await client.end()
     await client.connect()
     console.log('CLient connected')
 }catch(err){
