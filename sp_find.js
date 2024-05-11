@@ -44,5 +44,5 @@ return result.rows[0]
     }
 
 
-findMatNoSP('51.04.02.01.00').then(console.log)
+console.log(findMatNoSP('51.04.02.01.00'))
 module.exports  = findMatNoSP
