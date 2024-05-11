@@ -8,23 +8,20 @@ const replaceAll=(str, find, replace)=>{
   }
 
   chats = {}
-const spCheck = async(chatID)=>{
-bot.on("message", async (msg) =>{
-    const text = msg.text;
-    try{
-        const info = await findMatNoSP(text)
-        console.log(info)
-        const spToolsInfo = await replaceAll(info['tools'],',','\n')
-        console.log(spToolsInfo)
-        const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-        console.log('Вышлти из спчека спчек')
-        return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
-     }catch(err){
-        console.log('ПРоблема с спЧек ',err)
-     }
-    return console.log('spCheck ends')
-})
+const spCheck = async(chatID, text)=>{
 
+ try{
+    const info = await findMatNoSP(text)
+    console.log(info)
+    const spToolsInfo = await replaceAll(info['tools'],',','\n')
+    console.log(spToolsInfo)
+    const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
+    console.log('Вышлти из спчека спчек')
+    return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
+ }catch(err){
+    console.log('ПРоблема с спЧек ',err)
+ }
+return console.log('spCheck ends')
 }
 
 const start = async () => {
@@ -39,6 +36,7 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
+    const SP_INFO = /\/sp_info +/
     try {
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
@@ -55,10 +53,10 @@ const start = async () => {
         Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
         );
       }
-      if (text === "/sp_info") {
+      if (text === SP_INFO) {
         await bot.sendMessage(chatID, `Введите артикул запчасти`)
-        //await 
-        return spCheck(chatID)
+        //await spCheck(chatID,text)
+        return spCheck(chatID,text)
       }
       return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
     } catch (err) {
