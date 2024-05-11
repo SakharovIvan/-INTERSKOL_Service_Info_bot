@@ -27,5 +27,5 @@ const logADD = async(chatID, cli, text)=>{
     }catch(err){console.log(err)}
 
 }
-logADD(1234,'Ivan','sometext')
+logADD(1234,'Ivan','sometext').then(()=>console.log('done'))
 module.exports = logADD
