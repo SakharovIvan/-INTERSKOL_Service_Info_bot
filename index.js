@@ -19,7 +19,7 @@ const spCheck = async(chatID, text)=>{
     console.log('Вышлти из спчека спчек')
     return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
  }catch(err){
-    console.log(err)
+    console.log('ПРоблема с спЧек ',err)
  }
 return console.log('spCheck ends')
 }
@@ -58,7 +58,7 @@ const start = async () => {
       }
       return await bot.sendMessage(chatID, spCheck(chatID,text));
     } catch (err) {
-      console.log(err);
+      console.log('проблема с обработкой сообщения',err);
     }
   }
 );
