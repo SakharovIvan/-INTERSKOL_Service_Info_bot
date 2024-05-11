@@ -37,7 +37,7 @@ const start = async () => {
     const text = msg.text;
     const chatID = msg.chat.id;
     const username = msg.from.username
-    const time = msg.from.date
+    const time = msg.date
     //console.log(username)
     
     try {
