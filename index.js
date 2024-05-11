@@ -13,16 +13,16 @@ const spCheck = async()=>{
         const chatID = msg.chat.id
         try{
         const info = await findMatNoSP(text)
-        if (info===undefined){return bot.sendMessage(chatID, `Информация по артикулу не найден`)}
+        if (info===undefined){return await bot.sendMessage(chatID, `Информация по артикулу не найден`)}
         const spToolsInfo = replaceAll(info['tools'],',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
-        bot.sendMessage(chatID, `Найдена следующая информация\n ${spMessage}`)
+        await bot.sendMessage(chatID, `Найдена следующая информация\n ${spMessage}`)
     }catch(err){
         console.log(err)
     }
-
         return 
     })
+return await bot.sendMessage(chatID, `Для поиска другого артикула, введите команду \`/sp_info\``)
 }
 
 
