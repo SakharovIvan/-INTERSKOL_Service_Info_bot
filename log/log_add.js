@@ -22,7 +22,7 @@ const logADD = async(chatID, cli, text)=>{
 try{
     await client.query(`INSERT INTO clientlog (chatid, cli, text) VALUES (${chatID},${cli},${text});`)
     console.log('Cli Log added')
-}catch{throw Error}
+}catch(err){console.log(err)}
         //await client.connect();
    
        // await client.end();
@@ -30,5 +30,5 @@ try{
 
 }
 try{
-logADD(1234,'Ivan','sometext')}catch{throw Error}
+logADD(1234,'Ivan','sometext')}catch(err){console.log(err)}
 module.exports = logADD
