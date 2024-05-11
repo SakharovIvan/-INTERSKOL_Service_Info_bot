@@ -52,7 +52,8 @@ bot.on('message', async msg =>{
     }
     if (text === '/sp_info'){
         await bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        return spCheck(chatID)
+        await spCheck(chatID)
+        return 
     }
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
 
