@@ -36,7 +36,7 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
-    const SP_INFO = /\/sp_info [0-9,.]+/
+    const SP_INFO = /\/sp_info .+/
     try {
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
@@ -54,9 +54,9 @@ const start = async () => {
         );
       }
       if (text === SP_INFO) {
-        await bot.sendMessage(chatID, `Введите артикул запчасти`)
+        const sparePartRequest = text.replace('/sp_info ')
         //await spCheck(chatID,text)
-        return spCheck(chatID,text)
+        return spCheck(chatID,sparePartRequest)
       }
       return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
     } catch (err) {
