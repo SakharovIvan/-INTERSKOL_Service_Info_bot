@@ -12,17 +12,20 @@ const spCheck = async(chatID, text)=>{
 
  try{
     const info = await findMatNoSP(text)
+    console.log(info)
     const spToolsInfo = await replaceAll(info['tools'],',','\n')
-    const spMessage =await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
+    console.log(spToolsInfo)
+    const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
     console.log('Вышлти из спчека спчек')
     return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
  }catch(err){
     console.log(err)
  }
-
+return console.log('spCheck ends')
 }
 
 const start = async () => {
+    console.log('start start')
   bot.setMyCommands([
     { command: "/start", description: "Начальное приветствие" },
     { command: "/info", description: "Информация о клиенте" },
@@ -57,9 +60,10 @@ const start = async () => {
     } catch (err) {
       console.log(err);
     }
-  });
+  }
+);
 
-
+return console.log('start end')
 };
 
 start()
