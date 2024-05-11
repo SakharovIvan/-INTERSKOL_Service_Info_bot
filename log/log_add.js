@@ -9,7 +9,12 @@ const client = require('./log_bd.js')
 //);
 
 const logADD = async(chatID, cli, text)=>{
-await client.query(`INSERT INTO clientLog (chatID, cli, text) VALUES (${chatID},${cli},${text});`)
+    try{
+        await client.connect();
+        await client.query(`INSERT INTO clientLog (chatID, cli, text) VALUES (${chatID},${cli},${text});`)
+        await client.end();
+    }catch(err){console.log(err)}
+
 }
 
 module.exports = logADD
