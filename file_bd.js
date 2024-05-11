@@ -2,13 +2,7 @@ const fs = require("fs");
 const util = require("util");
 const { Client } = require("pg");
 
-const client = new Client({
-  user: "root",
-  host: "192.168.0.74",
-  database: "SpareParts_bd",
-  password: "root",
-  port: "5432",
-});
+
 
 const createTable = `
 CREATE TABLE sparepartmas ( 
@@ -83,13 +77,6 @@ const start = async () => {
         console.log(err);
       }
     }
-   // try{
-   //    const filter = await client.query(`SELECT * FROM sparepartmas WHERE sp = '00.02.04.04.01';`)
-   //     console.log(filter.rows[0].tools)
-   // }catch(err){
-   //     console.log('cant create filter',err)
-   // }
-    
     await client.end();
   }
 };

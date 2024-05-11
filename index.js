@@ -13,9 +13,7 @@ const spCheck = async()=>{
         const chatID = msg.chat.id
         const info = await findMatNoSP(text)
         const spToolsInfo = replaceAll(info['tools'],',','\n')
-        //const spToolsInfo = info['tools'].replace(',','\n')
         const spMessage = `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo} `
-        console.log(spToolsInfo)
         bot.sendMessage(chatID, `Найдена следующая информация\n ${spMessage}`)
         return 
     })
@@ -34,10 +32,13 @@ bot.on('message', async msg =>{
     const chatID = msg.chat.id
 
     if (text === '/start'){
-        return bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
+        await bot.sendPhoto(chatID, './INTERSKOL_logo.jpg')
+        await bot.sendMessage(chatID, `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`)
+        return
     }
     if (text === '/info'){
-        return bot.sendMessage(chatID, `Ваше имя ${msg.chat.first_name} ${msg.chat.last_name} ${user.msg}`)
+        return bot.sendMessage(chatID, `Для поиска применимости запчасти введите команду \`/sp_info\` и введите артикул ЗЧ\n
+        Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`)
     }
     if (text === '/sp_info'){
         bot.sendMessage(chatID, `Ведите артикул запчасти`)
