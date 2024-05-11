@@ -27,22 +27,16 @@ console.log('Проблема при подключении',err)
     try{
         
         result = await client.query(sqlFilter(table, filterParam))
+        client.end().then(()=>console.log('Client disconected'))
         console.log(result)
     }catch(err){
 console.log(err)
     }
-        await client.end()
-        //.then(()=>console.log('отключились от сервера'))
-    
-//        client.connect()
-//        .then(()=>console.log('CLient connected'))
-//        .then(()=>{result = client.query(sqlFilter(table, filterParam))})
-//        .catch(err=>console.log('CLient didnt connected',err))
-//        .finally(()=>client.end())
-//        console.log(result)
+
+     
 return result.rows[0]
     }
 
 
-console.log(findMatNoSP('51.04.02.01.00'))
+findMatNoSP('51.04.02.01.00').then(console.log)
 module.exports  = findMatNoSP
