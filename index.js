@@ -23,10 +23,12 @@ const spCheck = async()=>{
     console.log('Вышлти из ботон спчек')
         return 
     })
-return await bot.sendMessage(chatID, `Для поиска другого артикула, введите команду \`/sp_info\``)
+    await bot.sendMessage(chatID, `Для поиска другого артикула, введите команду \`/sp_info\``)
+return 
 }
 
 
+const start =()=>{
 bot.setMyCommands ([
     {command: '/start', description: 'Начальное приветствие'},
     {command: '/info', description: 'Информация о клиенте'},
@@ -57,6 +59,7 @@ bot.on('message', async msg =>{
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
 } )
 
+}
 
-
+start()
 
