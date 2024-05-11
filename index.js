@@ -2,7 +2,7 @@ const TelegramAPI = require('node-telegram-bot-api')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const findMatNoSP = require ('./sp_find')
-
+const logADD = require('./log/log_add.js')
 const replaceAll=(str, find, replace)=>{
     return str.replace(new RegExp(find, 'g'), replace);
   }
@@ -49,8 +49,8 @@ const start = async () => {
       if (text === "/info") {
         return bot.sendMessage(
           chatID,
-          `Для поиска применимости запчасти введите команду \`/sp_info\` и введите артикул ЗЧ\n
-        Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
+          `Для поиска применимости запчасти введите артикул ЗЧ\n
+        Для поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
         );
       }
 
