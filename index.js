@@ -8,9 +8,9 @@ const replaceAll=(str, find, replace)=>{
   }
 
 const spCheck = async()=>{
-    bot.on('message', async msg=>{
-        const text = msg.text
-        const chatID = msg.chat.id
+//    bot.on('message', async msg=>{
+//        const text = msg.text
+//        const chatID = msg.chat.id
         try{
         const info = await findMatNoSP(text)
         //if (info===undefined){return await bot.sendMessage(chatID, `Информация по артикулу не найден`)}
@@ -21,18 +21,19 @@ const spCheck = async()=>{
         console.log(err)
     }
     console.log('Вышлти из ботон спчек')
-        return 
-    })
     await bot.sendMessage(chatID, `Для поиска другого артикула, введите команду \`/sp_info\``)
+        return 
+ //   })
+    
 return 
 }
 
 
-const start =()=>{
+const start =async()=>{
 bot.setMyCommands ([
     {command: '/start', description: 'Начальное приветствие'},
     {command: '/info', description: 'Информация о клиенте'},
-    {command: '/tool_info', description: 'Информация об инструменте'},
+   // {command: '/tool_info', description: 'Информация об инструменте'},
     {command: '/sp_info', description: 'Поиск инструмента по запчасти'}
 ])
 
@@ -51,10 +52,10 @@ bot.on('message', async msg =>{
     }
     if (text === '/sp_info'){
         await bot.sendMessage(chatID, `Ведите артикул запчасти`)
-        await spCheck()
-        return 
+        return spCheck()
     }
     return bot.sendMessage(chatID, `Я тебя не понимаю`)
+
 }catch(err){ console.log(err)}
 
 } 
