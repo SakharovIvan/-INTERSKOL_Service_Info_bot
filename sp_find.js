@@ -29,13 +29,14 @@ const findMatNoSP = async (matNoSp) =>{
         let result = await client.query(sqlFilter(table, filterParam))
         console.log('Filtered table', result.rows[0])
         pool.end().then(()=>console.log('Client disconected'))
+        return result.rows[0]
         //console.log(result)
     }catch(err){
 console.log(err)
     }
 
      
-return result.rows[0]
+
     }
 
 module.exports  = findMatNoSP
