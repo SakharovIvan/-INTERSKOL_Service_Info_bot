@@ -30,7 +30,7 @@ const start = async () => {
     { command: "/start", description: "Начальное приветствие" },
     { command: "/info", description: "Информация о клиенте" },
     // {command: '/tool_info', description: 'Информация об инструменте'},
-    { command: "/sp_info", description: "Поиск инструмента по запчасти" },
+    //{ command: "/sp_info", description: "Поиск инструмента по запчасти" },
   ]);
 
   bot.on("message", async (msg) => {
