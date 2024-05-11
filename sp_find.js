@@ -26,8 +26,8 @@ const findMatNoSP = async (matNoSp) =>{
     try{
         const pool = await client.connect()
         console.log('CLient connected')
-        result = client.query(sqlFilter(table, filterParam)).then(()=>console.log('Filtered table'))
-        
+        result = await client.query(sqlFilter(table, filterParam))
+        console.log('Filtered table', result.rows[0])
         pool.end().then(()=>console.log('Client disconected'))
         //console.log(result)
     }catch(err){
