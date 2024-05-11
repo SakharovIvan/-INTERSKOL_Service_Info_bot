@@ -16,9 +16,9 @@ const findMatNoSP = async (matNoSp) =>{
 
     try{
         //const pool = await client.connect()
-        console.log('CLient connected')
+        //console.log('CLient connected')
         let result = await client.query(`SELECT * FROM sparepartmas WHERE sp = '${matNoSp}';`)
-        console.log('Filtered table', result.rows[0])
+        //console.log('Filtered table', result.rows[0])
        // pool.end().then(()=>console.log('Client disconected'))
         return result.rows[0]
         //console.log(result)

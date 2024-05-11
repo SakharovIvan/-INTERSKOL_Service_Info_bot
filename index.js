@@ -12,11 +12,11 @@ const spCheck = async(chatID, text)=>{
 
  try{
     const info = await findMatNoSP(text)
-    console.log(info)
+    //console.log(info)
     const spToolsInfo = await replaceAll(info['tools'],',','\n')
-    console.log(spToolsInfo)
+    //console.log(spToolsInfo)
     const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-    console.log('Вышлти из спчека спчек')
+    //console.log('Вышлти из спчека спчек')
     return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
  }catch(err){
     console.log('ПРоблема с спЧек ',err)
@@ -36,7 +36,8 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
-    
+    const username = msg.from.username
+    logADD(chatID,username,text).console.log(chatID,username,text)
     try {
       if (text === "/start") {
         await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
