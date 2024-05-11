@@ -18,9 +18,9 @@ const client = new Pool({
 //text TEXT
 //);
 
-const logADD = (chatID, cli, text)=>{
+const logADD = async(chatID, cli, text)=>{
 try{
-    client.query(`INSERT INTO clientlog (chatid, cli, text) VALUES (${chatID},${cli},${text});`)
+    await client.query(`INSERT INTO clientlog (chatid, cli, text) VALUES (${chatID},${cli},${text});`)
     console.log('Cli Log added')
 }catch{throw Error}
         //await client.connect();
