@@ -30,10 +30,10 @@ console.log('Проблема при подключении',err)
         console.log(result)
     }catch(err){
 console.log(err)
-    }finally{
+    }
         await client.end()
         //.then(()=>console.log('отключились от сервера'))
-    }
+    
 //        client.connect()
 //        .then(()=>console.log('CLient connected'))
 //        .then(()=>{result = client.query(sqlFilter(table, filterParam))})
