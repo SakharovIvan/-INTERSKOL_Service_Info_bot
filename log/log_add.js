@@ -1,7 +1,7 @@
 
-const { Client } = require("pg");
+const { Pool } = require("pg");
 
-const client = new Client({
+const client = new Pool({
   user: "root",
   host: "192.168.0.74",
   database: "SpareParts_bd",
@@ -20,10 +20,10 @@ const client = new Client({
 
 const logADD = async(chatID, cli, text)=>{
     try{
-      //  await client.connect();
+        await client.connect();
         await client.query(`INSERT INTO clientLog (chatID, cli, text) VALUES (${chatID},${cli},${text});`)
         console.log('Cli Log added')
-       // await client.end();
+        await client.end();
     }catch(err){console.log(err)}
 
 }
