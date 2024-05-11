@@ -8,8 +8,9 @@ const replaceAll=(str, find, replace)=>{
   }
 
   chats = {}
-const spCheck = async(chatID, text)=>{
-bot.onText(/+/,async ()=>{
+const spCheck = async(chatID)=>{
+bot.on("message", async (msg) =>{
+    const text = msg.text;
     try{
         const info = await findMatNoSP(text)
         console.log(info)
@@ -56,7 +57,7 @@ const start = async () => {
       }
       if (text === "/sp_info") {
         await bot.sendMessage(chatID, `Введите артикул запчасти`)
-        await spCheck(chatID,text)
+        await spCheck(chatID)
         return 
       }
       return await bot.sendMessage(chatID, `Я Вас не понимаю, но обязательно запишу`) //await spCheck(chatID,text);
