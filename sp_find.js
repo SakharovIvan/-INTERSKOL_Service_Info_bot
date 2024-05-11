@@ -9,7 +9,8 @@ const client = new Pool({
     host: "192.168.0.74",
     database: "SpareParts_bd",
     password: "root",
-    port: "5432"
+    port: "5432",
+    connectionTimeoutMillis: 2000,
   });
   
 const findMatNoSP = async (matNoSp) =>{
