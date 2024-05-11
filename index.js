@@ -23,7 +23,7 @@ const spCheck = async(chatID, text)=>{
  }
 return console.log('spCheck ends')
 }
-const SP_INFO = /\/sp_info [0-9.]+/
+
 const start = async () => {
     console.log('start start')
   bot.setMyCommands([
@@ -53,12 +53,8 @@ const start = async () => {
         Для поиска вхем инструмента введите команду \`/tool_info\` и введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
         );
       }
-      if (text == SP_INFO) {
-        const sparePartRequest = text.replace('/sp_info ')
-        //await spCheck(chatID,text)
-        return 
-      }
-      return spCheck(chatID,sparePartRequest)
+
+      return spCheck(chatID,text)
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
     }
