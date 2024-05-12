@@ -9,16 +9,12 @@ const fs = require("file-system");
 const WAY2 = /.+\(/;
 const CODEDEL = /\).+/;
 
-const replaceAll=(str, find, replace)=>{
-    return str.replace(new RegExp(find, 'g'), replace);
-  }
 
-  
 const spCheck = async(chatID, text)=>{
 
  try{
     const info = await findMatNoSP(text)
-    //const spToolsInfo = await replaceAll(info['tools'],',','\n')
+
     let toolsInlineKeyboar = []
     const spToolsArray = await info['tools'].split(',')
     for (let toolArr of spToolsArray){
@@ -27,7 +23,6 @@ const spCheck = async(chatID, text)=>{
     }
     const spMessage = await `${info['sp']}\n${info['name']}\n`//Список инструментов:\n${spToolsInfo}
     await bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
-    console.log(toolsInlineKeyboar)
     await bot.sendMessage(chatID, 'Вы можете выбрать инструмент',{
       reply_markup: {
         inline_keyboard: toolsInlineKeyboar
@@ -46,7 +41,6 @@ const spCheck = async(chatID, text)=>{
     await bot.sendDocument(chatID, el['toolschemedir'])
   }
 return
-  //return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
 }catch(err){
   console.log('ПРоблема с поиском инструмента ',err)
 }
@@ -93,8 +87,6 @@ const start = async () => {
   );
 
   bot.on('callback_query', async msg=> {
-    //console.log(msg)
-    //await bot.sendMessage(chatID, msg)
     const toolCode = parseInt(msg.data);
     const chatID = msg.message.chat.id;
 
