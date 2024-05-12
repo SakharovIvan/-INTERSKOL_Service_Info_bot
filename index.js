@@ -3,7 +3,7 @@ const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const findMatNoSP = require ('./sp_find')
 const logADD = require('./log/log_add.js')
-const toolFilter = require('./tool_cards_sql.js')
+const toolFilter = require('./tool_find.js')
 
 const replaceAll=(str, find, replace)=>{
     return str.replace(new RegExp(find, 'g'), replace);
@@ -19,9 +19,9 @@ const spCheck = async(chatID, text)=>{
 
     return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
  }catch(err){
-    console.log('ПРоблема с спЧек ',err)
+    console.log('ПРоблема с поиском ЗЧ ',err)
  }
- 
+
  try{
   const info = await toolFilter(text)
   const spToolsInfo = await replaceAll(info['tools'],',','\n')
@@ -29,7 +29,7 @@ const spCheck = async(chatID, text)=>{
 
   return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
 }catch(err){
-  console.log('ПРоблема с спЧек ',err)
+  console.log('ПРоблема с поиском инструмента ',err)
 }
 return bot.sendMessage(chatID,`Такого я не нашел(((`)
 }
