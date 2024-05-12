@@ -43,6 +43,7 @@ const toolNameReplace = (path) => {
 
 
 const dirFilesNames = async (enterPath) => {
+  try{
   const stat = await fsp.stat(enterPath);
   if (stat.isFile()) {
     return filepaths.push(`${enterPath}`);
@@ -51,7 +52,7 @@ const dirFilesNames = async (enterPath) => {
   for (let el of dir) {
     await dirFilesNames(`${enterPath}/${el}`);
   }
-  return;
+  return;}catch(err){console.log(err)}
 };
 
 const create_file_array = async () => {
@@ -65,7 +66,7 @@ const create_file_array = async () => {
 const write_files_to_SQL = async () => {
   try {
     const filesArray = await create_file_array();
-    //console.log(filesArray)
+    console.log(filesArray)
     await client.connect();
     await client.query(deleteTable);
     await client.query(createTable);
