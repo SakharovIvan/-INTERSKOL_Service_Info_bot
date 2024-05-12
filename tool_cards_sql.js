@@ -65,9 +65,10 @@ const create_file_array = async () => {
 
 
 const write_files_to_SQL = async () => {
+  const filesArray = await create_file_array();
+  console.log(filesArray)
   try {
-    const filesArray = await create_file_array();
-    console.log(filesArray)
+
     await client.connect();
     await client.query(deleteTable);
     await client.query(createTable);
