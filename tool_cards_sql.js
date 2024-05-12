@@ -21,8 +21,8 @@ const createTable = `
 CREATE TABLE toolinfo ( 
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     toolcode INTEGER,
-    toolname VARCHAR(150),
-    toolschemedir VARCHAR(250)
+    toolname TEXT,
+    toolschemedir TEXT
     );
 `;
 
@@ -48,7 +48,7 @@ const dirFilesNames = async (enterPath) => {
 
   const stat = await reafspstat(enterPath);
   if (stat.isFile()) {
-    console.log(enterPath)
+    //console.log(enterPath)
     return filepaths.push(`${enterPath}`);
   }
   const dir = await fspreadDir(enterPath);
@@ -77,14 +77,15 @@ try{
     await client.connect();
     await client.query(deleteTable);
     await client.query(createTable);
-    const newmas = [];
+   // const newmas = [];
     for (let file of filepaths) {
       if (file.includes(ZoneIdentifierFile)) {
         continue;
       }
       let toolcode = toolCodeReplace(file);
       let toolname = toolNameReplace(file);
-      newmas.push([toolcode, toolname, file]);
+      console.log(makeRow("toolinfo","toolcode, toolname, toolschemedir",`${toolcode},'${toolname}','${file}'`))
+      //newmas.push([toolcode, toolname, file]);
       await client.query(
         makeRow(
           "toolinfo",
