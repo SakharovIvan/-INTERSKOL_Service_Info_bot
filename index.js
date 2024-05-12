@@ -23,7 +23,7 @@ const spCheck = async(chatID, text)=>{
     const spToolsArray = await info['tools'].split(',')
     for (let toolArr of spToolsArray){
       let toolNumber = await toolArr.replace(WAY2, "").replace(CODEDEL, "")
-      await toolsInlineKeyboar.push({text: toolArr, callback_data: toolNumber})
+      await toolsInlineKeyboar.push([{text: toolArr, callback_data: toolNumber}])
     }
     const spMessage = await `${info['sp']}\n${info['name']}\n`//Список инструментов:\n${spToolsInfo}
     await bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
@@ -92,7 +92,7 @@ const start = async () => {
   );
 
   bot.on('callback_query', async msg=> {
-    console.log(msg)
+    //console.log(msg)
     //await bot.sendMessage(chatID, msg)
     const toolCode = parseInt(msg.data);
     const chatID = msg.message.chat.id;
