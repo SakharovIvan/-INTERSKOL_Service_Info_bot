@@ -24,10 +24,13 @@ const spCheck = async(chatID, text)=>{
 
  try{
   const info = await toolFilter(text)
-  const spToolsInfo = await replaceAll(info['tools'],',','\n')
-  const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-
-  return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
+  for (let el of info){
+    bot.sendMessage(chatID,`ВОт что нашел:`)
+    await bot.sendMessage(chatID, el['toolname'])
+    await bot.sendDocument(chatID, el['toolschemedir'])
+  }
+return
+  //return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
 }catch(err){
   console.log('ПРоблема с поиском инструмента ',err)
 }
