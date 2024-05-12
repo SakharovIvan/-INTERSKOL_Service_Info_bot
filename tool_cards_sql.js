@@ -59,8 +59,7 @@ const dirFilesNames = async (enterPath) => {
 const create_file_array = async () => {
   const toolsPath = "./tool_cards";
   let = filepaths = [];
-  await dirFilesNames(toolsPath);
-  return filepaths;
+  dirFilesNames(toolsPath).then(()=>{return filepaths} )  ;
 };
 
 
