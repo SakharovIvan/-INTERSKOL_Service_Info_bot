@@ -4,6 +4,7 @@ const bot = new TelegramAPI(token,{polling:true})
 const findMatNoSP = require ('./sp_find')
 const logADD = require('./log/log_add.js')
 const toolFilter = require('./tool_find.js')
+const fs = require("file-system");
 
 const WAY2 = /.+\(/;
 const CODEDEL = /\).+/;
@@ -66,7 +67,8 @@ const start = async () => {
     try {
       logADD(chatID,username,text,time)
       if (text === "/start") {
-        await bot.sendPhoto(chatID, "./INTERSKOL_logo.jpg");
+        const INterlogo =  fs.readFileSync("./INTERSKOL_logo.jpg")
+        await bot.sendPhoto(chatID, INterlogo);
         await bot.sendMessage(
           chatID,
           `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ`
