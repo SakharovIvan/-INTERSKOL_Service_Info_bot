@@ -14,7 +14,7 @@ const client = new Pool({
           let result = await client.query(
             `SELECT * FROM toolinfo WHERE toolcode = ${tool} OR toolname SIMILAR TO '%${tool}%' LIMIT 7;`
           );
-          console.log(result.rows)
+          //console.log(result.rows)
           return result.rows;
         } catch (err) {
           console.log(err);
