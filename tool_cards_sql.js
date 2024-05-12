@@ -1,6 +1,6 @@
 const fsp = require("file-system");
 const { Client } = require("pg");
-
+const util = require("util");
 
 //REGEX 
 const WAY = /.+\/.+\(/;
@@ -41,10 +41,10 @@ const toolNameReplace = (path) => {
   return path.replace(WAY2, "").replace(CODEDEL, "");
 };
 
-
+const reafspstat  = util.promisify(fsp.stat);
 const dirFilesNames = async (enterPath) => {
 
-  const stat = await fsp.stat(enterPath);
+  const stat = await reafspstat(enterPath);
   if (stat.isFile()) {
     console.log(enterPath)
     return filepaths.push(`${enterPath}`);
