@@ -22,7 +22,7 @@ CREATE TABLE toolinfo (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     toolcode INTEGER,
     toolname VARCHAR(150),
-    toolschemedir VARCHAR(250),
+    toolschemedir VARCHAR(250)
     );
 `;
 
