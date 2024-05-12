@@ -43,7 +43,7 @@ const toolNameReplace = (path) => {
 
 
 const dirFilesNames = async (enterPath) => {
-  try{
+
   const stat = await fsp.stat(enterPath);
   if (stat.isFile()) {
     console.log(enterPath)
@@ -53,7 +53,7 @@ const dirFilesNames = async (enterPath) => {
   for (let el of dir) {
     await dirFilesNames(`${enterPath}/${el}`);
   }
-  return;}catch(err){console.log(err)}
+  return;
 };
 
 const create_file_array = async () => {
