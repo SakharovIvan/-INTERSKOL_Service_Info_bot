@@ -42,6 +42,8 @@ const toolNameReplace = (path) => {
 };
 
 const reafspstat  = util.promisify(fsp.stat);
+const fspreadDir = util.promisify(fsp.readdir)
+
 const dirFilesNames = async (enterPath) => {
 
   const stat = await reafspstat(enterPath);
@@ -49,7 +51,7 @@ const dirFilesNames = async (enterPath) => {
     console.log(enterPath)
     return filepaths.push(`${enterPath}`);
   }
-  const dir = await fsp.readdir(enterPath);
+  const dir = await fspreadDir(enterPath);
   for (let el of dir) {
     await dirFilesNames(`${enterPath}/${el}`);
   }
