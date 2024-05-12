@@ -14,10 +14,20 @@ const spCheck = async(chatID, text)=>{
 
  try{
     const info = await findMatNoSP(text)
-    const spToolsInfo = await replaceAll(info['tools'],',','\n')
-    const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-
-    return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
+    //const spToolsInfo = await replaceAll(info['tools'],',','\n')
+    let toolsInlineKeyboar = []
+    const spToolsArray = await info['tools'].split(',')
+    for (let toolArr of spToolsArray){
+      toolsInlineKeyboar.push({text: toolArr, callback_data: toolArr})
+    }
+    const spMessage = await `${info['sp']}\n${info['name']}\n`//Список инструментов:\n${spToolsInfo}
+    await bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
+    await bot.sendMessage(chatID, 'Вы можете выбрать инструмент',{
+      reply_markup: {
+        inline_keyboard:[toolsInlineKeyboar]
+      }
+    })
+    return 
  }catch(err){
     console.log('ПРоблема с поиском ЗЧ ',err)
  }
@@ -42,17 +52,13 @@ const start = async () => {
   bot.setMyCommands([
     { command: "/start", description: "Начальное приветствие" },
     { command: "/info", description: "Информация о клиенте" },
-    // {command: '/tool_info', description: 'Информация об инструменте'},
-    //{ command: "/sp_info", description: "Поиск инструмента по запчасти" },
   ]);
 
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
     const username = msg.from.username
-    const time = msg.date
-    //console.log(username)
-    
+    const time = msg.date    
     try {
       logADD(chatID,username,text,time)
       if (text === "/start") {
@@ -76,9 +82,27 @@ const start = async () => {
       console.log('проблема с обработкой сообщения',err,msg);
     }
   }
-);
 
-return console.log('start end')
+  );
+
+  bot.on('callback_query', function onCallbackQuery(callbackQuery) {
+    const action = callbackQuery.data;
+    const msg = callbackQuery.message;
+    const opts = {
+      chat_id: msg.chat.id,
+      message_id: msg.message_id,
+    };
+    let text;
+  
+    if (action === '1') {
+      text = 'You hit button 1';
+    }
+  
+    bot.editMessageText(text, opts);
+  });
+  
+
+return 
 };
 
 start()

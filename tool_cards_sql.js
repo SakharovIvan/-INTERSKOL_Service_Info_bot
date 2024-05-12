@@ -58,12 +58,6 @@ const dirFilesNames = async (enterPath) => {
   return;
 };
 
-//const create_file_array = async () => {
-//  const toolsPath = "./tool_cards";
-//  let = filepaths = [];
-//  await dirFilesNames(toolsPath)  ;
-//};
-
 
 const write_files_to_SQL = async () => {
   const toolsPath = "./tool_cards";
