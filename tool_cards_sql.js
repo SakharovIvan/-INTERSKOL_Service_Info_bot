@@ -84,7 +84,7 @@ try{
       }
       let toolcode = toolCodeReplace(file);
       let toolname = toolNameReplace(file);
-      console.log(makeRow("toolinfo","toolcode, toolname, toolschemedir",`${toolcode},'${toolname}','${file}'`))
+      //console.log(makeRow("toolinfo","toolcode, toolname, toolschemedir",`${toolcode},'${toolname}','${file}'`))
       //newmas.push([toolcode, toolname, file]);
       await client.query(
         makeRow(
@@ -112,6 +112,7 @@ const toolFilter = async (tool) => {
     let result = await client.query(
       `SELECT * FROM sparepartmas WHERE toolcode = '${tool}' OR toolname LIKE '${tool}';`
     );
+    console.log(result.rows)
     return result.rows;
   } catch (err) {
     console.log(err);
