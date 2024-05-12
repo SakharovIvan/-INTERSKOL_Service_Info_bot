@@ -5,6 +5,9 @@ const findMatNoSP = require ('./sp_find')
 const logADD = require('./log/log_add.js')
 const toolFilter = require('./tool_find.js')
 
+const WAY2 = /.+\(/;
+const CODEDEL = /\).+/;
+
 const replaceAll=(str, find, replace)=>{
     return str.replace(new RegExp(find, 'g'), replace);
   }
@@ -18,7 +21,8 @@ const spCheck = async(chatID, text)=>{
     let toolsInlineKeyboar = []
     const spToolsArray = await info['tools'].split(',')
     for (let toolArr of spToolsArray){
-      toolsInlineKeyboar.push({text: toolArr, callback_data: toolArr})
+      let toolNumber = toolArr.replace(WAY2, "").replace(CODEDEL, "")
+      toolsInlineKeyboar.push({text: toolArr, callback_data: toolNumber})
     }
     const spMessage = await `${info['sp']}\n${info['name']}\n`//Список инструментов:\n${spToolsInfo}
     await bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
@@ -85,20 +89,12 @@ const start = async () => {
 
   );
 
-  bot.on('callback_query', function onCallbackQuery(callbackQuery) {
-    const action = callbackQuery.data;
-    const msg = callbackQuery.message;
-    const opts = {
-      chat_id: msg.chat.id,
-      message_id: msg.message_id,
-    };
-    let text;
-  
-    if (action === '1') {
-      text = 'You hit button 1';
-    }
-  
-    bot.editMessageText(text, opts);
+  bot.on('callback_query', async msg=> {
+    console.log(msg)
+    const toolCode = msg.data;
+    const chatID = msg.message.chat.id;
+    
+    return spCheck(chatID, toolCode)
   });
   
 
