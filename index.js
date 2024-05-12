@@ -90,6 +90,7 @@ const start = async () => {
   );
 
   bot.on('callback_query', async msg=> {
+    console.log(msg)
     //await bot.sendMessage(chatID, msg)
     const toolCode = msg.data;
     const chatID = msg.message.chat.id;
