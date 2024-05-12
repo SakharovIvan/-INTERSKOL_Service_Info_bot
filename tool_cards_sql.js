@@ -69,7 +69,7 @@ const write_files_to_SQL = async () => {
     const filesArray = await create_file_array();
     console.log(filesArray)
     await client.connect();
-   // await client.query(deleteTable);
+    await client.query(deleteTable);
     await client.query(createTable);
     const newmas = [];
     for (let file of filesArray) {
@@ -95,7 +95,7 @@ const write_files_to_SQL = async () => {
 };
 
 try {
-  write_files_to_SQL().then("Tool Schem SQL Base was created");
+  write_files_to_SQL();
 } catch (err) {
   console.log(err);
 }
