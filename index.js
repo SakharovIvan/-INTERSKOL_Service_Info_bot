@@ -3,20 +3,20 @@ const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
 const findMatNoSP = require ('./sp_find')
 const logADD = require('./log/log_add.js')
+const toolFilter = require('./tool_cards_sql.js')
+
 const replaceAll=(str, find, replace)=>{
     return str.replace(new RegExp(find, 'g'), replace);
   }
 
-  chats = {}
+  
 const spCheck = async(chatID, text)=>{
 
  try{
     const info = await findMatNoSP(text)
-    //console.log(info)
     const spToolsInfo = await replaceAll(info['tools'],',','\n')
-    //console.log(spToolsInfo)
     const spMessage = await `${info['sp']}\n${info['name']}\nСписок инструментов:\n${spToolsInfo}`
-    //console.log('Вышлти из спчека спчек')
+
     return bot.sendMessage(chatID,`ВОт что нашел:\n${spMessage}`)
  }catch(err){
     console.log('ПРоблема с спЧек ',err)

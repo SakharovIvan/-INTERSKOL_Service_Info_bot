@@ -97,3 +97,16 @@ try {
 } catch (err) {
   console.log(err);
 }
+
+const toolFilter = async (tool) => {
+  try {
+    let result = await client.query(
+      `SELECT * FROM sparepartmas WHERE toolcode = '${tool}' OR toolname LIKE '${tool}';`
+    );
+    return result.rows;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = toolFilter;
