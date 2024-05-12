@@ -30,7 +30,7 @@ const spCheck = async(chatID, text)=>{
     console.log(toolsInlineKeyboar)
     await bot.sendMessage(chatID, 'Вы можете выбрать инструмент',{
       reply_markup: {
-        inline_keyboard:[toolsInlineKeyboar]
+        inline_keyboard: toolsInlineKeyboar
       }
     })
     return 
