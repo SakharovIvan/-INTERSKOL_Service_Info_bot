@@ -56,23 +56,25 @@ const dirFilesNames = async (enterPath) => {
   return;
 };
 
-const create_file_array = async () => {
-  const toolsPath = "./tool_cards";
-  let = filepaths = [];
-  dirFilesNames(toolsPath).then(()=>{return filepaths} )  ;
-};
+//const create_file_array = async () => {
+//  const toolsPath = "./tool_cards";
+//  let = filepaths = [];
+//  await dirFilesNames(toolsPath)  ;
+//};
 
 
 const write_files_to_SQL = async () => {
-  const filesArray = await create_file_array();
-  console.log(filesArray)
-  try {
+  const toolsPath = "./tool_cards";
+  let = filepaths = [];
 
+  await dirFilesNames(toolsPath) ;
+  
+  try {
     await client.connect();
     await client.query(deleteTable);
     await client.query(createTable);
     const newmas = [];
-    for (let file of filesArray) {
+    for (let file of filepaths) {
       if (file.includes(ZoneIdentifierFile)) {
         continue;
       }
