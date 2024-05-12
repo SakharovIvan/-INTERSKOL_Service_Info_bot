@@ -12,7 +12,7 @@ const client = new Pool({
     const toolFilter = async (tool) => {
         try {
           let result = await client.query(
-            `SELECT * FROM toolinfo WHERE toolcode = ${tool} OR toolname LIKE '${tool}';`
+            `SELECT * FROM toolinfo WHERE toolcode = ${tool} OR toolname LIKE '${tool} LIMIT 7';`
           );
           console.log(result.rows)
           return result.rows;
