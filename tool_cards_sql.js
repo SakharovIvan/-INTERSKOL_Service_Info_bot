@@ -46,6 +46,7 @@ const dirFilesNames = async (enterPath) => {
   try{
   const stat = await fsp.stat(enterPath);
   if (stat.isFile()) {
+    console.log(enterPath)
     return filepaths.push(`${enterPath}`);
   }
   const dir = await fsp.readdir(enterPath);
