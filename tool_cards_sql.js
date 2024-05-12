@@ -66,8 +66,10 @@ const dirFilesNames = async (enterPath) => {
 const write_files_to_SQL = async () => {
   const toolsPath = "./tool_cards";
   let = filepaths = [];
-
-  await dirFilesNames(toolsPath) ;
+try{
+  await dirFilesNames(toolsPath) ;}catch (err) {
+    console.log(err);
+  } 
   
   try {
     await client.connect();
