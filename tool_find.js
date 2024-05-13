@@ -11,11 +11,18 @@ const client = new Pool({
   
     const toolFilter = async (tool) => {
         try {
+          if(parseInt(tool)===Nan){
           let result = await client.query(
-            `SELECT * FROM toolinfo WHERE toolcode = ${tool} OR toolname SIMILAR TO '%${tool}%' LIMIT 7;`
+            `SELECT * FROM toolinfo WHERE toolc toolname SIMILAR TO '%${tool}%' LIMIT 7;`
           );
-          //console.log(result.rows)
-          return result.rows;
+
+          return result.rows;}else{
+            let result = await client.query(
+              `SELECT * FROM toolinfo WHERE toolcode = ${tool} LIMIT 7;`
+            );
+  
+            return result.rows
+          }
         } catch (err) {
           console.log(err);
         }
