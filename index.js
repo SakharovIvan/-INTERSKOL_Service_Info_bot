@@ -87,7 +87,7 @@ const start = async () => {
   );
 
   bot.on('callback_query', async msg=> {
-    const toolCode = parseInt(msg.data);
+    const toolCode = msg.data;
     const chatID = msg.message.chat.id;
 
     return spCheck(chatID, toolCode)
