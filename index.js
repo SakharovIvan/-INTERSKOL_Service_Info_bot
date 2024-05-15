@@ -59,7 +59,7 @@ const start = async () => {
     const username = msg.from.username
     const time = msg.date    
     try {
-      logADD(chatID,username,text,time)
+      await logADD(chatID,username,text,time)
       if (text === "/start") {
         const INterlogo =  fs.readFileSync("./INTERSKOL_logo.jpg")
         await bot.sendPhoto(chatID, INterlogo);
