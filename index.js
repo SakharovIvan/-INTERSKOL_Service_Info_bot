@@ -1,10 +1,9 @@
 const TelegramAPI = require('node-telegram-bot-api')
-const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
+const token = '6678230536:AAGVmjy45__gdXflUrlNsXbgdxlxU9gJc5g'
 const bot = new TelegramAPI(token,{polling:true})
-const findMatNoSP = require ('./sp_find')
 const logADD = require('./log/log_add.js')
-const toolFilter = require('./tool_find.js')
 const fs = require("file-system");
+const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
 
 const WAY2 = /.+\(/;
 const CODEDEL = /\).+/;
