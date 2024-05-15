@@ -1,7 +1,7 @@
 const TelegramAPI = require('node-telegram-bot-api')
 const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 const bot = new TelegramAPI(token,{polling:true})
-const logADD = require('./log/log_add.js')
+import  {logADD} from './log/log_add.js'
 const fs = require("file-system");
 const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
 
