@@ -77,23 +77,18 @@ const start = async () => {
           ``
         );
       }
-     // if (text === '/uploadtoolspcards'){
-     //   try{
-     //   const thumbPath = await bot.getFileLink(msg.document.file_id);
-     //   await toolspcardsupload(thumbPath,pathSP_tools)
-     //   await bot.sendMessage(chatID, 'Файл загружен успешно')
-     //   }catch(err){
-     //     await bot.sendMessage(chatID, 'Произошла ошибка', err)
-     //     console.log(err)
-     //   }
-     // }
-
-      if(text==='/uploaddata'){
-
-        await bot.sendMessage(chatID,'Выберите что загрузить', uploadData)
-        return
-
+      if (msg.document.file_name === 'uploadtoolspcards.txt'){
+        try{
+        const thumbPath = await bot.getFileLink(msg.document.file_id);
+        await toolspcardsupload(thumbPath,pathSP_tools)
+        await bot.sendMessage(chatID, 'Файл загружен успешно')
+        }catch(err){
+          await bot.sendMessage(chatID, 'Произошла ошибка', err)
+          console.log(err)
+        }
       }
+
+
 
       return spCheck(chatID,text)
     } catch (err) {
