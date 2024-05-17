@@ -6,6 +6,7 @@ const fs = require("file-system");
 const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
 const {toolspcardsupload} = require('./updatedata/toolspcardsupload.js')
 const logo = './data/INTERSKOL_logo.jpg'
+const {uploadData} =require('./options.js')
 
 const pathSP_tools='./data/pathSP_tools.txt'
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
@@ -76,27 +77,23 @@ const start = async () => {
           ``
         );
       }
-      if (text === '/uploadtoolspcards'){
-        try{
-        const thumbPath = await bot.getFileLink(msg.document.file_id);
-        await toolspcardsupload(thumbPath,pathSP_tools)
-        await bot.sendMessage(chatID, 'Файл загружен успешно')
-        }catch(err){
-          await bot.sendMessage(chatID, 'Произошла ошибка', err)
-          console.log(err)
-        }
-      }
+     // if (text === '/uploadtoolspcards'){
+     //   try{
+     //   const thumbPath = await bot.getFileLink(msg.document.file_id);
+     //   await toolspcardsupload(thumbPath,pathSP_tools)
+     //   await bot.sendMessage(chatID, 'Файл загружен успешно')
+     //   }catch(err){
+     //     await bot.sendMessage(chatID, 'Произошла ошибка', err)
+     //     console.log(err)
+     //   }
+     // }
 
-    //  if(text==='/uploadspwarehouse'){
-    //    try{
-    //      const thumbPath = await bot.getFileLink(msg.document.file_id);
-    //      await toolspcardsupload(thumbPath,pathSP_warehouse)
-    //      await bot.sendMessage(chatID, 'Файл загружен успешно')
-    //      }catch(err){
-    //        await bot.sendMessage(chatID, 'Произошла ошибка', err)
-    //        console.log(err)
-    //      }
-    //  }
+      if(text==='/uploaddata'){
+
+        await bot.sendMessage(chatID,'Выберите что загрузить', uploadData)
+        return
+
+      }
 
       return spCheck(chatID,text)
     } catch (err) {
@@ -106,21 +103,21 @@ const start = async () => {
 
   );
 
-  bot.onText(/\/uploadspwarehouse/, async(msg)=>{
-    try{
-      const thumbPath = await bot.getFileLink(msg.document.file_id);
-      await toolspcardsupload(thumbPath,pathSP_warehouse)
-      await bot.sendMessage(chatID, 'Файл загружен успешно')
-      }catch(err){
-        await bot.sendMessage(chatID, 'Произошла ошибка', err)
-        console.log(err)
-      }
-  })
+
 
   bot.on('callback_query', async msg=> {
+    if (msg.data === 'SPtoTool'){
+      try{
+        const thumbPath = await bot.getFileLink(msg.document.file_id);
+        await toolspcardsupload(thumbPath,pathSP_warehouse)
+        await bot.sendMessage(chatID, 'Файл загружен успешно')
+        }catch(err){
+          await bot.sendMessage(chatID, 'Произошла ошибка', err)
+          console.log(err)
+        }
+    }
     const toolCode = msg.data;
     const chatID = msg.message.chat.id;
-
     return spCheck(chatID, toolCode)
   });
   
