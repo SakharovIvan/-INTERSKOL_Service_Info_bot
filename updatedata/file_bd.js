@@ -84,5 +84,5 @@ const update_sp_data = async () => {
   }
 };
 
-module.exports = update_sp_data
+module.exports = {update_sp_data}
 

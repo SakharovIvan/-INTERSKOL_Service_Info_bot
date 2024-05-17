@@ -26,4 +26,4 @@ const warehouseDataAddtoSQL = async()=>{
 }
 }
 
-module.exports= warehouseDataAddtoSQL
+module.exports= {warehouseDataAddtoSQL}
