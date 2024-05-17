@@ -1,5 +1,6 @@
 const { Pool } = require("pg");
 const { Client } = require("pg");
+const token = '6898283747:AAFJIfz8RcsIvr0J8zY2G78cGnMbvbEjFAo'
 
 const pool = new Pool({
   user: "root",
@@ -18,4 +19,4 @@ const client = new Client({
   });
   
 
-module.exports = {pool, client}
+module.exports = {pool, client,token}
