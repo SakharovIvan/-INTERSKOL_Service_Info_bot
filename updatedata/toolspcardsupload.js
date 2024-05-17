@@ -1,7 +1,7 @@
 const fs = require('fs')
 const https = require('https')
 
-const start=async(thumbPath, path)=>{
+const toolspcardsupload=async(thumbPath, path)=>{
 
  //  bot.on("message", async (thumbPath) => 
  // const thumbPath = await bot.getFileLink(msg.document.file_id);
@@ -22,4 +22,4 @@ const start=async(thumbPath, path)=>{
 
 }
 
-module.exports = {start}
+module.exports = {toolspcardsupload}
