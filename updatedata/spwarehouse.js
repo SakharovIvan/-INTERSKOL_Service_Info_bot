@@ -1,6 +1,6 @@
 const fs = require("fs");
 const util = require("util");
-const {client}=require('./db.js')
+const {client}=require('../db.js')
 
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
 const RE_EOL = /\r?\n/;
