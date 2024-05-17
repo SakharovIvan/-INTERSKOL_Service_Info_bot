@@ -88,7 +88,7 @@ const start = async () => {
           console.log(err)
         }
       }
-      return spCheck(chatID,text)
+      return //spCheck(chatID,text)
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
     }
