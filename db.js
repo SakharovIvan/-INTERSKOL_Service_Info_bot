@@ -19,4 +19,4 @@ const client = new Client({
   });
   
 
-module.exports = {pool, client,token}
+module.exports = {pool, client, token}

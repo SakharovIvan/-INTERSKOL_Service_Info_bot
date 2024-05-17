@@ -1,10 +1,11 @@
 const TelegramAPI = require('node-telegram-bot-api')
-const token = require("./db.js")
+const {token} = require("./db.js")
 const bot = new TelegramAPI(token,{polling:true})
-const logADD = require('./log/log_add.js')
+const {logADD} = require('./log/log_add.js')
 const fs = require("file-system");
 const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
-const toolspcardsupload = require('./updatedata/toolspcardsupload.js')
+const {toolspcardsupload} = require('./updatedata/toolspcardsupload.js')
+const logo = './data/INTERSKOL_logo.jpg'
 
 const pathSP_tools='./data/pathSP_tools.txt'
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
@@ -33,7 +34,6 @@ const spCheck = async(chatID, text)=>{
  }catch(err){
     console.log('ПРоблема с поиском ЗЧ ',err)
  }
-
  try{
   const info = await toolFilter(text)
   for (let el of info){
@@ -49,10 +49,9 @@ return bot.sendMessage(chatID,`Такого я не нашел(((`)
 }
 
 const start = async () => {
-    console.log('start start')
+    console.log('start')
   bot.setMyCommands([
     { command: "/start", description: "Начальное приветствие" },
-  //  { command: "/info", description: "Информация о клиенте" },
   ]);
 
   bot.on("message", async (msg) => {
@@ -63,7 +62,7 @@ const start = async () => {
     try {
       await logADD(chatID,username,text,time)
       if (text === "/start") {
-        const INterlogo =  fs.readFileSync("./data/INTERSKOL_logo.jpg")
+        const INterlogo =  fs.readFileSync(logo)
         await bot.sendPhoto(chatID, INterlogo);
         await bot.sendMessage(
           chatID,
@@ -115,7 +114,7 @@ const start = async () => {
   });
   
 
-return 
+return
 };
 
 start()
