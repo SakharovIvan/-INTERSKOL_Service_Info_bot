@@ -95,9 +95,5 @@ try{
   }
 };
 
-try {
-  write_files_to_SQL();
-} catch (err) {
-  console.log(err);
-}
+module.exports= write_files_to_SQL
 

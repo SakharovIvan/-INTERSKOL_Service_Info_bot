@@ -55,7 +55,7 @@ const makeFromFileSparePartArray = async () => {
   return masSP;
 };
 
-const start = async () => {
+const update_sp_data = async () => {
   const massp = await makeFromFileSparePartArray();
   const table = "sparepartmas";
   const tableRow = "sp, name, tools";
@@ -80,5 +80,5 @@ const start = async () => {
   }
 };
 
-start();
+module.exports = update_sp_data
 

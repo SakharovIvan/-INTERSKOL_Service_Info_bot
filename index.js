@@ -6,7 +6,8 @@ const fs = require("file-system");
 const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
 const {toolspcardsupload} = require('./updatedata/toolspcardsupload.js')
 const logo = './data/INTERSKOL_logo.jpg'
-const {uploadData} =require('./options.js')
+const update_sp_data = require('./updatedata/file_bd.js')
+const write_files_to_SQL =require('./updatedata/toolspcardsupload.js')
 
 const pathSP_tools='./data/pathSP_tools.txt'
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
@@ -50,7 +51,7 @@ return bot.sendMessage(chatID,`Такого я не нашел(((`)
 }
 
 const start = async () => {
-    console.log('start')
+  console.log("start");
   bot.setMyCommands([
     { command: "/start", description: "Начальное приветствие" },
   ]);
@@ -58,12 +59,13 @@ const start = async () => {
   bot.on("message", async (msg) => {
     const text = msg.text;
     const chatID = msg.chat.id;
-    const username = msg.from.username
-    const time = msg.date    
+    const username = msg.from.username;
+    const time = msg.date;
     try {
-      await logADD(chatID,username,text,time)
+      await logADD(chatID, username, text, time);
+
       if (text === "/start") {
-        const INterlogo =  fs.readFileSync(logo)
+        const INterlogo = fs.readFileSync(logo);
         await bot.sendPhoto(chatID, INterlogo);
         await bot.sendMessage(
           chatID,
@@ -71,52 +73,56 @@ const start = async () => {
         );
         return;
       }
+
       if (text === "/info") {
-        return bot.sendMessage(
-          chatID,
-          ``
-        );
+        return bot.sendMessage(chatID, ``);
       }
-      if (msg.document.file_name === 'uploadtoolspcards.txt'){
-        try{
-        const thumbPath = await bot.getFileLink(msg.document.file_id);
-        await bot.sendMessage(chatID, thumbPath)
-        await toolspcardsupload(thumbPath,pathSP_tools)
-        await bot.sendMessage(chatID, 'Файл загружен успешно')
-        }catch(err){
-          await bot.sendMessage(chatID, 'Произошла ошибка', err)
-          console.log(err)
+
+      if (msg.document.file_name === "uploadtoolspcards.txt") {
+        try {
+          const thumbPath = await bot.getFileLink(msg.document.file_id);
+          await bot.sendMessage(chatID, thumbPath);
+          await toolspcardsupload(thumbPath, pathSP_tools);
+          await bot.sendMessage(chatID, "Файл загружен успешно");
+        } catch (err) {
+          await bot.sendMessage(chatID, "Произошла ошибка", err);
+          console.log(err);
         }
       }
-      return //spCheck(chatID,text)
+
+      if (text === "/updatedata") {
+        try {
+          await update_sp_data();
+          await write_files_to_SQL();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      return; //spCheck(chatID,text)
     } catch (err) {
-      console.log('проблема с обработкой сообщения',err,msg);
+      console.log("проблема с обработкой сообщения", err, msg);
     }
-  }
+  });
 
-  );
-
-
-
-  bot.on('callback_query', async msg=> {
-    if (msg.data === 'SPtoTool'){
-      try{
+  bot.on("callback_query", async (msg) => {
+    if (msg.data === "SPtoTool") {
+      try {
         const thumbPath = await bot.getFileLink(msg.document.file_id);
-        await toolspcardsupload(thumbPath,pathSP_warehouse)
-        await bot.sendMessage(chatID, 'Файл загружен успешно')
-        }catch(err){
-          await bot.sendMessage(chatID, 'Произошла ошибка', err)
-          console.log(err)
-        }
+        await toolspcardsupload(thumbPath, pathSP_warehouse);
+        await bot.sendMessage(chatID, "Файл загружен успешно");
+      } catch (err) {
+        await bot.sendMessage(chatID, "Произошла ошибка", err);
+        console.log(err);
+      }
     }
     const toolCode = msg.data;
     const chatID = msg.message.chat.id;
-    return spCheck(chatID, toolCode)
+    return spCheck(chatID, toolCode);
   });
-  
 
-return
+  return;
 };
 
-start()
+start();
 
