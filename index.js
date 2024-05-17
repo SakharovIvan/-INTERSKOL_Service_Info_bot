@@ -87,16 +87,16 @@ const start = async () => {
         }
       }
 
-      if(text==='/uploadspwarehouse'){
-        try{
-          const thumbPath = await bot.getFileLink(msg.document.file_id);
-          await toolspcardsupload(thumbPath,pathSP_warehouse)
-          await bot.sendMessage(chatID, 'Файл загружен успешно')
-          }catch(err){
-            await bot.sendMessage(chatID, 'Произошла ошибка', err)
-            console.log(err)
-          }
-      }
+    //  if(text==='/uploadspwarehouse'){
+    //    try{
+    //      const thumbPath = await bot.getFileLink(msg.document.file_id);
+    //      await toolspcardsupload(thumbPath,pathSP_warehouse)
+    //      await bot.sendMessage(chatID, 'Файл загружен успешно')
+    //      }catch(err){
+    //        await bot.sendMessage(chatID, 'Произошла ошибка', err)
+    //        console.log(err)
+    //      }
+    //  }
 
       return spCheck(chatID,text)
     } catch (err) {
@@ -105,6 +105,17 @@ const start = async () => {
   }
 
   );
+
+  bot.onText(/\/uploadspwarehouse/, async(msg)=>{
+    try{
+      const thumbPath = await bot.getFileLink(msg.document.file_id);
+      await toolspcardsupload(thumbPath,pathSP_warehouse)
+      await bot.sendMessage(chatID, 'Файл загружен успешно')
+      }catch(err){
+        await bot.sendMessage(chatID, 'Произошла ошибка', err)
+        console.log(err)
+      }
+  })
 
   bot.on('callback_query', async msg=> {
     const toolCode = msg.data;
