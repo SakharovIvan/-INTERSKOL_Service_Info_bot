@@ -80,6 +80,7 @@ const start = async () => {
       if (msg.document.file_name === 'uploadtoolspcards.txt'){
         try{
         const thumbPath = await bot.getFileLink(msg.document.file_id);
+        await bot.sendMessage(chatID, thumbPath)
         await toolspcardsupload(thumbPath,pathSP_tools)
         await bot.sendMessage(chatID, 'Файл загружен успешно')
         }catch(err){
@@ -87,9 +88,6 @@ const start = async () => {
           console.log(err)
         }
       }
-
-
-
       return spCheck(chatID,text)
     } catch (err) {
       console.log('проблема с обработкой сообщения',err,msg);
