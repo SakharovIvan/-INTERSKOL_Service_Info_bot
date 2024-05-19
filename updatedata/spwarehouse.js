@@ -6,7 +6,7 @@ const pathSP_warehouse='./data/pathSP_warehouse.txt'
 const RE_EOL = /\r?\n/;
 const TAB = /\t/;
 
-const updateSQL = (table, value, sp,date) =>{
+const updateSQL = (table, value, sp, date) =>{
     return `UPDATE ${table} SET warehouse = '${value}' warehousedateupdate = '${date}'  WHERE sp = '${sp}';`
 }
 
@@ -22,7 +22,7 @@ const warehouseDataAddtoSQL = async()=>{
     for (let spwarestatus of masData){
         const spwarestatusrow = await spwarestatus.split(TAB)
         console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0]))
-        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],new Date().toLocaleDateString()))
+        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],'19-05-2024'))
     }
 }catch(err){
     console.log(err)
