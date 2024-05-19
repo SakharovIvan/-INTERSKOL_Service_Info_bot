@@ -17,6 +17,7 @@ const toolspcardsupload=async(thumbPath, path)=>{
             })
         }
         )
+    console.log('file_created')
     }catch(err){
         console.log(err)}
 
