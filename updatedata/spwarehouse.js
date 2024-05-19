@@ -13,6 +13,7 @@ const updateSQL = (table, value, sp,date) =>{
 const warehouseDataAddtoSQL = async()=>{
     const readFile = util.promisify(fs.readFile);
     const currentdate = new Date().toLocaleDateString()
+    console.log(currentdate)
     try{
     const fileData = await readFile(pathSP_warehouse, "utf-8");
     const masData = await fileData.split(RE_EOL);
