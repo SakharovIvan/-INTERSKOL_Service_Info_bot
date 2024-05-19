@@ -25,7 +25,7 @@ const RE_EOL = /\r?\n/;
 const TAB = /\t/;
 
 class SP {
-  constructor([tool, sp, name,characteristics]) {
+  constructor([sp, name,tool,  characteristics]) {
     this.tool = [tool];
     this.sp = sp;
     this.name = name;
