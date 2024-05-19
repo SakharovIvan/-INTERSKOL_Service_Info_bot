@@ -22,7 +22,7 @@ const warehouseDataAddtoSQL = async()=>{
     for (let spwarestatus of masData){
         const spwarestatusrow = await spwarestatus.split(TAB)
         console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0]))
-        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
+        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate.toString))
     }
 }catch(err){
     console.log(err)
