@@ -94,13 +94,22 @@ const start = async () => {
           const thumbPath = await bot.getFileLink(msg.document.file_id);
           await bot.sendMessage(chatID, thumbPath);
           await toolspcardsupload(thumbPath, pathSP_warehouse);
-          await bot.sendMessage(chatID, "Файл загружен успешно");
-          await warehouseDataAddtoSQL ()
+          
+          
         }catch(err){
           await bot.sendMessage(chatID, "Произошла ошибка", err);
           console.log(err);
         }
       }
+      if (text === "/updatewarehouse") {
+        try {
+          await warehouseDataAddtoSQL ();
+          await bot.sendMessage(chatID, "Данные по скаду обновлены");
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
 
       if (text === "/updatedata") {
         try {
