@@ -11,7 +11,7 @@ CREATE TABLE sparepartmas (
     tools text,
     characteristics text,
     warehouse text,
-    warehousedateupdate date
+    warehousedateupdate text
     );
 `;
 const makeRow = (table, tableRow, row) => {
