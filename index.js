@@ -65,7 +65,7 @@ const start = async () => {
     try {
       await logADD(chatID, username, text, time);
 
-      if (text === "/start") {
+      if (text === '/start') {
         const INterlogo = fs.readFileSync(logo);
         await bot.sendPhoto(chatID, INterlogo);
         await bot.sendMessage(
@@ -73,6 +73,24 @@ const start = async () => {
           `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\n ля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
         );
         return;
+      }
+      if (text === '/updatewarehouse') {
+        console.log('прошли проверка')
+        try {
+          await warehouseDataAddtoSQL ();
+          await bot.sendMessage(chatID, "Данные по скаду обновлены");
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (text === '/updatedata') {
+        console.log('прошли проверка')
+        try {
+          await update_sp_data();
+          await write_files_to_SQL();
+        } catch (err) {
+          console.log(err);
+        }
       }
 
       if (msg.document.file_name === "uploadtoolspcards.txt") {
@@ -95,26 +113,6 @@ const start = async () => {
           
         }catch(err){
           await bot.sendMessage(chatID, "Произошла ошибка", err);
-          console.log(err);
-        }
-      }
-      if (text === '/updatewarehouse') {
-        console.log('прошли проверка')
-        try {
-          await warehouseDataAddtoSQL ();
-          await bot.sendMessage(chatID, "Данные по скаду обновлены");
-        } catch (err) {
-          console.log(err);
-        }
-      }
-
-
-      if (text === '/updatedata') {
-        console.log('прошли проверка')
-        try {
-          await update_sp_data();
-          await write_files_to_SQL();
-        } catch (err) {
           console.log(err);
         }
       }
