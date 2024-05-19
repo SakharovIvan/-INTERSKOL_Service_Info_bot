@@ -14,11 +14,11 @@ const warehouseDataAddtoSQL = async()=>{
     const readFile = util.promisify(fs.readFile);
     try{
     const fileData = await readFile(pathSP_warehouse, "utf-8");
-    const masData = fileData.split(RE_EOL);
+    const masData = await fileData.split(RE_EOL);
    await client.connect()
     for (let spwarestatus of masData){
+        const spwarestatusrow = await spwarestatus.split(TAB)
         console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0] ))
-        const spwarestatusrow = spwarestatus.split(TAB)
         await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0] ))
     }
 }catch(err){
