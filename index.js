@@ -92,32 +92,32 @@ const start = async () => {
           console.log(err);
         }
       }
-//      if (msg.document.file_name!== undefined){
-//        console.log('пройдена проверка на документ')
-//      if (msg.document.file_name === "uploadtoolspcards.txt") {
-//        try {
-//          const thumbPath = await bot.getFileLink(msg.document.file_id);
-//          await bot.sendMessage(chatID, thumbPath);
-//          await toolspcardsupload(thumbPath, pathSP_tools);
-//          await bot.sendMessage(chatID, "Файл загружен успешно");
-//        } catch (err) {
-//          await bot.sendMessage(chatID, "Произошла ошибка", err);
-//          console.log(err);
-//        }
-//      }
-//      if(msg.document.file_name==='spwarehouse.txt'){
-//        try{
-//          const thumbPath = await bot.getFileLink(msg.document.file_id);
-//          await bot.sendMessage(chatID, thumbPath);
-//          await toolspcardsupload(thumbPath, pathSP_warehouse);
-//          
-//          
-//        }catch(err){
-//          await bot.sendMessage(chatID, "Произошла ошибка", err);
-//          console.log(err);
-//        }
-//      }
-//    }
+      if (msg.document.file_name!== undefined){
+        console.log('пройдена проверка на документ')
+      if (msg.document.file_name === "uploadtoolspcards.txt") {
+        try {
+          const thumbPath = await bot.getFileLink(msg.document.file_id);
+          await bot.sendMessage(chatID, thumbPath);
+          await toolspcardsupload(thumbPath, pathSP_tools);
+          await bot.sendMessage(chatID, "Файл загружен успешно");
+        } catch (err) {
+          await bot.sendMessage(chatID, "Произошла ошибка", err);
+          console.log(err);
+        }
+      }
+      if(msg.document.file_name==='spwarehouse.txt'){
+        try{
+          const thumbPath = await bot.getFileLink(msg.document.file_id);
+          await bot.sendMessage(chatID, thumbPath);
+          await toolspcardsupload(thumbPath, pathSP_warehouse);
+          
+          
+        }catch(err){
+          await bot.sendMessage(chatID, "Произошла ошибка", err);
+          console.log(err);
+        }
+      }
+    }
 
       return spCheck(chatID,text)
     } catch (err) {
