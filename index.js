@@ -26,7 +26,7 @@ const spCheck = async(chatID, text)=>{
       let toolNumber = await toolArr.replace(WAY2, "").replace(CODEDEL, "")
       toolsInlineKeyboar.push([{text: toolArr, callback_data: toolNumber}])
     }
-    const spMessage = await `${info['sp']}\n${info['name']}\n${info['characteristics']}\nСклад ${info['warehouse']} обновление от${ info['warehousedateupdate']}`
+    const spMessage = await `${info['sp']}\n${info['name']}\n${info['characteristics']}\nСклад '${info['warehouse']}' \nОбновление от ${ info['warehousedateupdate']}`
     await bot.sendMessage(chatID,`Вот что нашел:\n${spMessage}`)
     await bot.sendMessage(chatID, 'Вы можете выбрать инструмент',{
       reply_markup: {
