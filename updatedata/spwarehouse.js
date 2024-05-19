@@ -15,7 +15,7 @@ const warehouseDataAddtoSQL = async()=>{
     try{
     const fileData = await readFile(pathSP_warehouse, "utf-8");
     const masData = await fileData.split(RE_EOL);
-    const currentdate = new Date
+    const currentdate = new Date()
     const curdate = `${currentdate.getFullYear()}-${currentdate.getMonth()+1}-${currentdate.getDate()}`
     await client.connect()
     for (let spwarestatus of masData){
