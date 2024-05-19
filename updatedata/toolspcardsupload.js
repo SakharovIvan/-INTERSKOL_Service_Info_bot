@@ -2,14 +2,11 @@ const fs = require('fs')
 const https = require('https')
 
 const toolspcardsupload=async(thumbPath, path)=>{
-
- //  bot.on("message", async (thumbPath) => 
- // const thumbPath = await bot.getFileLink(msg.document.file_id);
- // }
- //)
-
         try{
-            await fs.unlink(path)
+        await fs.unlink(path,function(err){
+            if(err) return console.log(err);
+            console.log('file deleted successfully');
+        })
         const file = await fs.createWriteStream(path,'utf8')
         await https.get(thumbPath, function(response) {
             response.pipe(file);
