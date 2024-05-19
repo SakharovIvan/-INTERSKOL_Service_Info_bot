@@ -12,8 +12,8 @@ const updateSQL = (table, value, sp, date) =>{
 
 const warehouseDataAddtoSQL = async()=>{
     const readFile = util.promisify(fs.readFile);
-    //const currentdate = new Date().toLocaleDateString()
-    //console.log(currentdate)
+    const currentdate = new Date().toLocaleDateString()
+    console.log(currentdate)
     try{
     const fileData = await readFile(pathSP_warehouse, "utf-8");
     const masData = await fileData.split(RE_EOL);
@@ -21,8 +21,8 @@ const warehouseDataAddtoSQL = async()=>{
     await client.connect()
     for (let spwarestatus of masData){
         const spwarestatusrow = await spwarestatus.split(TAB)
-        console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0]))
-        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],'19-05-2024'))
+        console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
+        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
     }
 }catch(err){
     console.log(err)
