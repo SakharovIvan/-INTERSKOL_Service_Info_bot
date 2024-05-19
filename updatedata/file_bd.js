@@ -38,7 +38,7 @@ class SP {
 
 const makeFromFileSparePartArray = async () => {
   const readFile = util.promisify(fs.readFile);
-  const fileData = await readFile("./data/uploadtoolspcards.txt", "utf-8");
+  const fileData = await readFile("./data/pathSP_tools.txt", "utf-8");
   const masData = fileData.split(RE_EOL);
   const masSP = [];
   const promises = masData.map((id) => {
