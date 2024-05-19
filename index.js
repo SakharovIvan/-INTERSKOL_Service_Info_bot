@@ -75,10 +75,6 @@ const start = async () => {
         return;
       }
 
-      if (text === "/info") {
-        return bot.sendMessage(chatID, ``);
-      }
-
       if (msg.document.file_name === "uploadtoolspcards.txt") {
         try {
           const thumbPath = await bot.getFileLink(msg.document.file_id);
@@ -102,7 +98,8 @@ const start = async () => {
           console.log(err);
         }
       }
-      if (text === "/updatewarehouse") {
+      if (text === '/updatewarehouse') {
+        console.log('прошли проверка')
         try {
           await warehouseDataAddtoSQL ();
           await bot.sendMessage(chatID, "Данные по скаду обновлены");
@@ -112,7 +109,8 @@ const start = async () => {
       }
 
 
-      if (text === "/updatedata") {
+      if (text === '/updatedata') {
+        console.log('прошли проверка')
         try {
           await update_sp_data();
           await write_files_to_SQL();
