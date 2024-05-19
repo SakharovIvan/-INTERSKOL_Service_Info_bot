@@ -14,7 +14,7 @@ const pathSP_tools='./data/pathSP_tools.txt'
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
 
 const WAY2 = /.+\(/;
-const CODEDEL = /\).+/;
+const CODEDEL = /\)/;
 
 const spCheck = async(chatID, text)=>{
 
