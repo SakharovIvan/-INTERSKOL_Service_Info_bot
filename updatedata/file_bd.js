@@ -69,9 +69,6 @@ const update_sp_data = async () => {
     await client.query(deleteTable);
     await client.query(createTable);
     console.log('Old Table deleted, new created')
-  } catch (err) {
-    console.log(err);
-  } finally {
     for (let sp_info of massp) {
       row = `'${sp_info["sp"]}', '${sp_info["name"]}', '${sp_info["tool"]}', '${sp_info["characteristics"]}'`;
       try {
@@ -80,6 +77,10 @@ const update_sp_data = async () => {
         console.log(err);
       }
     }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    
     await client.end();
   }
 };
