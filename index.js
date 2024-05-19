@@ -92,7 +92,7 @@ const start = async () => {
           console.log(err);
         }
       }
-
+      if (msg.document.file_name!= undefined){
       if (msg.document.file_name === "uploadtoolspcards.txt") {
         try {
           const thumbPath = await bot.getFileLink(msg.document.file_id);
@@ -116,6 +116,7 @@ const start = async () => {
           console.log(err);
         }
       }
+    }
 
       return spCheck(chatID,text)
     } catch (err) {
