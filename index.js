@@ -87,7 +87,7 @@ const start = async () => {
         console.log('прошли проверка')
         try {
           await update_sp_data();
-          await write_files_to_SQL();
+          //await write_files_to_SQL();
         } catch (err) {
           console.log(err);
         }
