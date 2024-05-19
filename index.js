@@ -92,7 +92,8 @@ const start = async () => {
           console.log(err);
         }
       }
-      if (msg.document.file_name!= undefined){
+      if (msg.document.file_name!== undefined){
+        console.log('пройдена проверка на документ')
       if (msg.document.file_name === "uploadtoolspcards.txt") {
         try {
           const thumbPath = await bot.getFileLink(msg.document.file_id);
