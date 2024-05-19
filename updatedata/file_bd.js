@@ -6,7 +6,7 @@ const {client}=require('../db.js')
 const createTable = `
 CREATE TABLE sparepartmas ( 
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    sp VARCHAR(50),
+    sp VARCHAR(150),
     name VARCHAR(150),
     tools text,
     characteristics text,
