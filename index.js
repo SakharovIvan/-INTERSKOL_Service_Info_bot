@@ -7,7 +7,6 @@ const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
 const {toolspcardsupload} = require('./updatedata/toolspcardsupload.js')
 const logo = './data/INTERSKOL_logo.jpg'
 const {update_sp_data} = require('./updatedata/file_bd.js')
-const {write_files_to_SQL} =require('./updatedata/toolspcardsupload.js')
 const {warehouseDataAddtoSQL} = require('./updatedata/spwarehouse.js')
 
 const pathSP_tools='./data/pathSP_tools.txt'
