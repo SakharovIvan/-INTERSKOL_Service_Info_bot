@@ -7,7 +7,8 @@ const RE_EOL = /\r?\n/;
 const TAB = /\t/;
 
 const updateSQL = (table, value, sp, date) =>{
-    return `UPDATE ${table} SET warehouse = '${value}' warehousedateupdate = '${date}'  WHERE sp = '${sp}';`
+    return `UPDATE ${table} SET warehouse = '${value}' WHERE sp = '${sp}';
+    UPDATE ${table} SET warehousedateupdate = '${date}' WHERE sp = '${sp}';`
 }
 
 const warehouseDataAddtoSQL = async()=>{
