@@ -26,7 +26,7 @@ const spCheck = async(chatID, text)=>{
       let toolNumber = await toolArr.replace(WAY2, "").replace(CODEDEL, "")
       toolsInlineKeyboar.push([{text: toolArr, callback_data: toolNumber}])
     }
-    const spMessage = await `${info['sp']}\n${info['name']}\n`
+    const spMessage = await `${info['sp']}\n${info['name']}\n${info['characteristics']}\nСклад ${info['warehouse']} обновление от${ info['warehousedateupdate']}`
     await bot.sendMessage(chatID,`Вот что нашел:\n${spMessage}`)
     await bot.sendMessage(chatID, 'Вы можете выбрать инструмент',{
       reply_markup: {
@@ -94,6 +94,7 @@ const start = async () => {
       }
       if (msg.document !== undefined){
         console.log('пройдена проверка на документ')
+
       if (msg.document.file_name === "uploadtoolspcards.txt") {
         try {
           const thumbPath = await bot.getFileLink(msg.document.file_id);

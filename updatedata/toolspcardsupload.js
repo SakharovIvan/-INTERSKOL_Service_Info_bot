@@ -9,6 +9,7 @@ const toolspcardsupload=async(thumbPath, path)=>{
  //)
 
         try{
+            await fs.unlink(path)
         const file = await fs.createWriteStream(path,'utf8')
         await https.get(thumbPath, function(response) {
             response.pipe(file);
