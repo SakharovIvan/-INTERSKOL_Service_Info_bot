@@ -95,5 +95,5 @@ try{
   }
 };
 
-module.exports= write_files_to_SQL
+module.exports= {write_files_to_SQL}
 
