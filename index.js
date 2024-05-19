@@ -111,7 +111,7 @@ const start = async () => {
           const thumbPath = await bot.getFileLink(msg.document.file_id);
           await bot.sendMessage(chatID, thumbPath);
           await toolspcardsupload(thumbPath, pathSP_warehouse);
-          
+          await bot.sendMessage(chatID, "Файл загружен успешно")
           
         }catch(err){
           await bot.sendMessage(chatID, "Произошла ошибка", err);
