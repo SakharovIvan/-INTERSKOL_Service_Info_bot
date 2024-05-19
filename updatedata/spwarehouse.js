@@ -17,7 +17,8 @@ const warehouseDataAddtoSQL = async()=>{
     const masData = fileData.split(RE_EOL);
    await client.connect()
     for (let spwarestatus of masData){
-        await client.query(updateSQL("sparepartmas",spwarestatus[1],spwarestatus[0] ))
+        const spwarestatusrow = spwarestatus.split(TAB)
+        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0] ))
     }
 }catch(err){
     console.log(err)
