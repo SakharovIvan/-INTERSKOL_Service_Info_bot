@@ -82,6 +82,7 @@ const start = async () => {
             await bot.sendMessage(chatID, "Данные по скаду обновлены");
           } catch (err) {
             console.log(err);
+            await bot.sendMessage(chatID, "Произошла ошибка", err);
           }
           break;
 
@@ -89,42 +90,18 @@ const start = async () => {
           console.log("прошли проверка");
           try {
             await update_sp_data();
+            await bot.sendMessage(chatID, "Данные по привязкам ЗЧ к инстурменту обновлены");
             await write_files_to_SQL();
+            await bot.sendMessage(chatID, "Данные по взрывсхемам обновлены");
           } catch (err) {
             console.log(err);
+            await bot.sendMessage(chatID, "Произошла ошибка", err);
           }
           break;
 
         default:
           spCheck(chatID, text);
       }
-      //  if (text === '/start') {
-      //    const INterlogo = fs.readFileSync(logo);
-      //    await bot.sendPhoto(chatID, INterlogo);
-      //    await bot.sendMessage(
-      //      chatID,
-      //      `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\n ля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
-      //    );
-      //    return;
-      //  }
-      //  if (text === '/updatewarehouse') {
-      //    console.log('прошли проверка')
-      //    try {
-      //      await warehouseDataAddtoSQL ();
-      //      await bot.sendMessage(chatID, "Данные по скаду обновлены");
-      //    } catch (err) {
-      //      console.log(err);
-      //    }
-      //  }
-      //  if (text === '/updatedata') {
-      //    console.log('прошли проверка')
-      //    try {
-      //      await update_sp_data();
-      //      await write_files_to_SQL();
-      //    } catch (err) {
-      //      console.log(err);
-      //    }
-      //  }
       if (msg.document !== undefined) {
         console.log("пройдена проверка на документ");
 
@@ -154,7 +131,7 @@ const start = async () => {
         }
       }
 
-      return; //spCheck(chatID,text)
+      return; 
     } catch (err) {
       console.log("проблема с обработкой сообщения", err, msg);
     }
