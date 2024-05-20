@@ -21,7 +21,7 @@ const warehouseDataAddtoSQL = async()=>{
 
     for (let spwarestatus of masData){
         const spwarestatusrow = await spwarestatus.split(TAB)
-        console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
+        //console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
         await pool.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
     }
     console.log('ready')
