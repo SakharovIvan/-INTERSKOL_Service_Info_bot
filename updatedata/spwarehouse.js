@@ -1,6 +1,6 @@
 const fs = require("fs");
 const util = require("util");
-const {client}=require('../db.js')
+const {pool}=require('../db.js')
 
 const pathSP_warehouse='./data/pathSP_warehouse.txt'
 const RE_EOL = /\r?\n/;
@@ -22,7 +22,7 @@ const warehouseDataAddtoSQL = async()=>{
     for (let spwarestatus of masData){
         const spwarestatusrow = await spwarestatus.split(TAB)
         console.log(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
-        await client.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
+        await pool.query(updateSQL("sparepartmas",spwarestatusrow[1],spwarestatusrow[0],currentdate))
     }
     console.log('ready')
 }catch(err){
