@@ -3,7 +3,7 @@ const {token} = require("./db.js")
 const bot = new TelegramAPI(token,{polling:true})
 const logADD = require('./log/log_add.js')
 const fs = require("file-system");
-const { toolFilter, findMatNoSP } = require('./SQLtablefilters.js')
+const { toolFilter, findMatNoSP, findSPbyChar} = require('./SQLtablefilters.js')
 const {toolspcardsupload} = require('./updatedata/toolspcardsupload.js')
 const logo = './data/INTERSKOL_logo.jpg'
 const {update_sp_data} = require('./updatedata/file_bd.js')
@@ -64,63 +64,97 @@ const start = async () => {
     const time = msg.date;
     try {
       await logADD(chatID, username, text, time);
+      switch (text) {
+        
+        case "/start":
+          const INterlogo = fs.readFileSync(logo);
+          await bot.sendPhoto(chatID, INterlogo);
+          await bot.sendMessage(
+            chatID,
+            `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\nДля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере инструмента или артикула с коробки инструмента`
+          );
+          break;
 
-      if (text === '/start') {
-        const INterlogo = fs.readFileSync(logo);
-        await bot.sendPhoto(chatID, INterlogo);
-        await bot.sendMessage(
-          chatID,
-          `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\n ля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
-        );
-        return;
-      }
-      if (text === '/updatewarehouse') {
-        console.log('прошли проверка')
-        try {
-          await warehouseDataAddtoSQL ();
-          await bot.sendMessage(chatID, "Данные по скаду обновлены");
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      if (text === '/updatedata') {
-        console.log('прошли проверка')
-        try {
-          await update_sp_data();
-          //await write_files_to_SQL();
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      if (msg.document !== undefined){
-        console.log('пройдена проверка на документ')
+        case "/updatewarehouse":
+          console.log("прошли проверка");
+          try {
+            await warehouseDataAddtoSQL();
+            await bot.sendMessage(chatID, "Данные по скаду обновлены");
+          } catch (err) {
+            console.log(err);
+          }
+          break;
 
-      if (msg.document.file_name === "uploadtoolspcards.txt") {
-        try {
-          const thumbPath = await bot.getFileLink(msg.document.file_id);
-          await bot.sendMessage(chatID, thumbPath);
-          await toolspcardsupload(thumbPath, pathSP_tools);
-          await bot.sendMessage(chatID, "Файл загружен успешно");
-        } catch (err) {
-          await bot.sendMessage(chatID, "Произошла ошибка", err);
-          console.log(err);
-        }
-      }
-      if(msg.document.file_name==='spwarehouse.txt'){
-        try{
-          const thumbPath = await bot.getFileLink(msg.document.file_id);
-          await bot.sendMessage(chatID, thumbPath);
-          await toolspcardsupload(thumbPath, pathSP_warehouse);
-          await bot.sendMessage(chatID, "Файл загружен успешно")
-          
-        }catch(err){
-          await bot.sendMessage(chatID, "Произошла ошибка", err);
-          console.log(err);
-        }
-      }
-    }
+        case "/updatedata":
+          console.log("прошли проверка");
+          try {
+            await update_sp_data();
+            await write_files_to_SQL();
+          } catch (err) {
+            console.log(err);
+          }
+          break;
 
-      return spCheck(chatID,text)
+        default:
+          spCheck(chatID, text);
+      }
+      //  if (text === '/start') {
+      //    const INterlogo = fs.readFileSync(logo);
+      //    await bot.sendPhoto(chatID, INterlogo);
+      //    await bot.sendMessage(
+      //      chatID,
+      //      `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\n ля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере нструмента или артикула с коробки инструмента`
+      //    );
+      //    return;
+      //  }
+      //  if (text === '/updatewarehouse') {
+      //    console.log('прошли проверка')
+      //    try {
+      //      await warehouseDataAddtoSQL ();
+      //      await bot.sendMessage(chatID, "Данные по скаду обновлены");
+      //    } catch (err) {
+      //      console.log(err);
+      //    }
+      //  }
+      //  if (text === '/updatedata') {
+      //    console.log('прошли проверка')
+      //    try {
+      //      await update_sp_data();
+      //      await write_files_to_SQL();
+      //    } catch (err) {
+      //      console.log(err);
+      //    }
+      //  }
+      if (msg.document !== undefined) {
+        console.log("пройдена проверка на документ");
+
+        if (msg.document.file_name === "uploadtoolspcards.txt") {
+          try {
+            await bot.sendMessage(chatID, "Началась загрузка файоа файла со списокм ЗЧ с инструментом");
+            const thumbPath = await bot.getFileLink(msg.document.file_id);
+            await bot.sendMessage(chatID, thumbPath);
+            await toolspcardsupload(thumbPath, pathSP_tools);
+            await bot.sendMessage(chatID, "Файл загружен успешно");
+          } catch (err) {
+            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            console.log(err);
+          }
+        }
+        if (msg.document.file_name === "spwarehouse.txt") {
+          try {
+            await bot.sendMessage(chatID, "Началась загрузка файоа файла со складом ЗЧ");
+            const thumbPath = await bot.getFileLink(msg.document.file_id);
+            await bot.sendMessage(chatID, thumbPath);
+            await toolspcardsupload(thumbPath, pathSP_warehouse);
+            await bot.sendMessage(chatID, "Файл загружен успешно");
+          } catch (err) {
+            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            console.log(err);
+          }
+        }
+      }
+
+      return; //spCheck(chatID,text)
     } catch (err) {
       console.log("проблема с обработкой сообщения", err, msg);
     }
