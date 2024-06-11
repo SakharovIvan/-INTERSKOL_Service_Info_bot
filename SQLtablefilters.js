@@ -1,9 +1,9 @@
 const { pool } = require("./db.js");
 
 const toolFilter = async (tool) => {
-  const newTool = Number(tool)
-  const typeoftool = typeof newTool;
-  if (typeoftool === "number") {
+ // const newTool = Number(tool)
+ // const typeoftool = typeof newTool;
+  if (Number(tool) !== NaN) {
     try {
       let result = await pool.query(
         `SELECT * FROM toolinfo WHERE toolcode = ${tool} LIMIT 7 ;`
