@@ -3,7 +3,7 @@ const { pool } = require("./db.js");
 const toolFilter = async (tool) => {
   try {
     let result = await pool.query(
-      `SELECT * FROM toolinfo WHERE toolcode = ${tool} LIMIT 7;` // OR toolname SIMILAR TO '%${tool}%'
+      `SELECT * FROM toolinfo WHERE toolcode = ${tool} OR toolname ILIKE '%${tool}%' LIMIT 7 ;` // OR toolname ILIKE '%${tool}%'
     );
     return result.rows;
   } catch (err) {
