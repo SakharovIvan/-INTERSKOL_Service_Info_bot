@@ -1,7 +1,8 @@
 const { pool } = require("./db.js");
 
 const toolFilter = async (tool) => {
-  const typeoftool = typeof tool;
+  const newTool = Number(tool)
+  const typeoftool = typeof newTool;
   if (typeoftool === "number") {
     try {
       let result = await pool.query(
