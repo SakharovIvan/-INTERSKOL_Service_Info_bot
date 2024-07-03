@@ -38,7 +38,7 @@ const spCheck = async(chatID, text)=>{
     console.log('ПРоблема с поиском ЗЧ ',err)
  }
  try{
-  const info = await toolFilter(text)
+  const info = await toolFilter(text.toUpperCase())
   for (let el of info){
     bot.sendMessage(chatID,`Вот что нашел:`)
     await bot.sendMessage(chatID, el['toolname'])
@@ -71,7 +71,7 @@ const start = async () => {
           await bot.sendPhoto(chatID, INterlogo);
           await bot.sendMessage(
             chatID,
-            `Добро пожаловать в телграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\nДля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере инструмента или артикула с коробки инструмента`
+            `Добро пожаловать в телеграм бот по информационной системе ИНТЕРСКОЛ\nДля поиска применимости запчасти введите артикул ЗЧ\nДля поиска схем инструмента введите код инструмента - первые числа до точки в серийном номере инструмента или артикула с коробки инструмента`
           );
           break;
 
@@ -107,7 +107,7 @@ const start = async () => {
 
         if (msg.document.file_name === "uploadtoolspcards.txt") {
           try {
-            await bot.sendMessage(chatID, "Началась загрузка файоа файла со списокм ЗЧ с инструментом");
+            await bot.sendMessage(chatID, "Началась загрузка файла файла со списокм ЗЧ с инструментом");
             const thumbPath = await bot.getFileLink(msg.document.file_id);
             await bot.sendMessage(chatID, thumbPath);
             await toolspcardsupload(thumbPath, pathSP_tools);
