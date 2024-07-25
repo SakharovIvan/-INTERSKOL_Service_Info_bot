@@ -85,7 +85,8 @@ const update_sp_data = async () => {
   }
 };
 try {
-  await update_sp_data()
+  update_sp_data()
+  .then(()=>{console.log('ready')})
 } catch (error) {
   console.log(error)
 }

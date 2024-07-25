@@ -96,7 +96,8 @@ try{
 };
 
 try {
-  await write_files_to_SQL()
+  write_files_to_SQL()
+  .then(()=>{console.log('ready')})
 } catch (error) {
   console.log(error)
 }
