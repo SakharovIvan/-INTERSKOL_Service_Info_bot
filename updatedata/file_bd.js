@@ -84,6 +84,11 @@ const update_sp_data = async () => {
     await client.end();
   }
 };
+try {
+  await update_sp_data()
+} catch (error) {
+  console.log(error)
+}
 
 module.exports = {update_sp_data}
 

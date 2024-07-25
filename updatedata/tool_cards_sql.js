@@ -95,5 +95,12 @@ try{
   }
 };
 
+try {
+  await write_files_to_SQL()
+} catch (error) {
+  console.log(error)
+}
+
+
 module.exports= {write_files_to_SQL}
 
