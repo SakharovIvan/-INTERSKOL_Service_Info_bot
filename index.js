@@ -114,6 +114,7 @@ const start = async () => {
             await bot.sendMessage(chatID, "Файл загружен успешно");
           } catch (err) {
             await bot.sendMessage(chatID, "Произошла ошибка", err);
+            await logADD(chatID, username, text, time, err);
             console.log(err);
           }
         }
