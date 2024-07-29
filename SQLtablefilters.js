@@ -45,5 +45,15 @@ const findSPbyChar = async (char) => {
     console.log(err);
   }
 };
+const findSPanalog = async (text)=>{
+  try {
+    let result = await pool.query(
+      `SELECT * FROM sparepartanalog WHERE sp ='${text}';`
+    );
+    return result.rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-module.exports = { toolFilter, findMatNoSP, findSPbyChar };
+module.exports = { toolFilter, findMatNoSP, findSPbyChar,findSPanalog };

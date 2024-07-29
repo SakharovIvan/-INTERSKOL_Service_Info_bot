@@ -7,6 +7,7 @@ const {
   toolFilter,
   findMatNoSP,
   findSPbyChar,
+  findSPanalog
 } = require("./SQLtablefilters.js");
 const { toolspcardsupload } = require("./updatedata/toolspcardsupload.js");
 const logo = "./data/INTERSKOL_logo.jpg";
@@ -38,14 +39,16 @@ const spCheck = async (chatID, text) => {
         inline_keyboard: toolsInlineKeyboar,
       },
     });
+    const analog = await findSPanalog(text)
+    await bot.sendMessage(chatID,analog)
     return;
   } catch (err) {
     console.log("ПРоблема с поиском ЗЧ ", err);
   }
   try {
     const info = await toolFilter(text.toUpperCase());
+    await bot.sendMessage(chatID, `Вот что нашел:`);
     for (let el of info) {
-      bot.sendMessage(chatID, `Вот что нашел:`);
       await bot.sendMessage(chatID, el["toolname"]);
       await bot.sendDocument(chatID, el["toolschemedir"]);
     }
