@@ -106,8 +106,8 @@ const update_sp_analog = async () => {
   const masData = fileData.split(RE_EOL);
   const masSP = [];
   try {
-    await client.query(createTableSPAnalog);
     await client.query(deleteTableSPAnalog);
+    await client.query(createTableSPAnalog);
     const promises = masData.map(async(id) => {
       const spananlog = id.split(TAB)
       await client.query(makeRow('sparepartanalog',"sp, analog", `'${spananlog[0]}', '${spananlog[1]}'`))
