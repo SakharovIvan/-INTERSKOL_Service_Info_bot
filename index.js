@@ -39,16 +39,18 @@ const spCheck = async (chatID, text) => {
         inline_keyboard: toolsInlineKeyboar,
       },
     });
-    const analog = await findSPanalog(text)
-    await bot.sendMessage(chatID,analog)
+    findSPanalog(text)
+    .then((analog)=>{
+      bot.sendMessage(chatID,analog)
+    })
     return;
   } catch (err) {
     console.log("ПРоблема с поиском ЗЧ ", err);
   }
   try {
     const info = await toolFilter(text.toUpperCase());
-    await bot.sendMessage(chatID, `Вот что нашел:`);
     for (let el of info) {
+      await bot.sendMessage(chatID, `Вот что нашел:`);
       await bot.sendMessage(chatID, el["toolname"]);
       await bot.sendDocument(chatID, el["toolschemedir"]);
     }
