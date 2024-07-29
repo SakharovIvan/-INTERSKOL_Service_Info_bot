@@ -41,7 +41,7 @@ const spCheck = async (chatID, text) => {
     });
     findSPanalog(text)
     .then((analog)=>{
-      bot.sendMessage(chatID,analog)
+      bot.sendMessage(chatID,`${analog}`)
     })
     return;
   } catch (err) {
