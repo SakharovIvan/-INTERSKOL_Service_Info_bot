@@ -41,10 +41,17 @@ const spCheck = async (chatID, text) => {
     });
     findSPanalog(text)
     .then((analog)=>{
+      let analogInlineKeyboar =[]
       for (let el of analog){
-        bot.sendMessage(chatID,el["analog"])
+        analogInlineKeyboar.push([{ text: el["analog"], callback_data: el["analog"] }])
       }
-
+      bot.sendMessage(chatID,"Есть аналоги 🔁",
+        {
+          reply_markup: {
+            inline_keyboard: analogInlineKeyboar,
+          },
+        }
+      )
     })
     return;
   } catch (err) {
