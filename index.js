@@ -10,12 +10,13 @@ const {
 } = require("./SQLtablefilters.js");
 const { toolspcardsupload } = require("./updatedata/toolspcardsupload.js");
 const logo = "./data/INTERSKOL_logo.jpg";
-const { update_sp_data } = require("./updatedata/file_bd.js");
+const { update_sp_data,update_sp_analog } = require("./updatedata/file_bd.js");
 const { warehouseDataAddtoSQL } = require("./updatedata/spwarehouse.js");
 const { write_files_to_SQL } = require("./updatedata/tool_cards_sql.js");
 
 const pathSP_tools = "./data/pathSP_tools.txt";
 const pathSP_warehouse = "./data/pathSP_warehouse.txt";
+const pathSP_analog ='./data/analog_SP.txt'
 
 const WAY2 = /.+\(/;
 const CODEDEL = /\)/;
@@ -79,18 +80,25 @@ const start = async () => {
           break;
 
         case "/updatewarehouse":
-          console.log("прошли проверка");
           try {
             await warehouseDataAddtoSQL();
             await bot.sendMessage(chatID, "Данные по скаду обновлены");
           } catch (err) {
             console.log(err);
-            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
           }
           break;
+          case "/analog":
+            try {
+              await update_sp_analog();
+              await bot.sendMessage(chatID, "Данные по аналогам обновлены");
+            } catch (err) {
+              console.log(err);
+              await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
+            }
+            break;
 
         case "/updatedata":
-          console.log("прошли проверка");
           try {
             update_sp_data()
               .then(() => {
@@ -106,7 +114,7 @@ const start = async () => {
               });
           } catch (err) {
             console.log(err);
-            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
           }
           break;
 
@@ -127,7 +135,7 @@ const start = async () => {
             await toolspcardsupload(thumbPath, pathSP_tools);
             await bot.sendMessage(chatID, "Файл загружен успешно");
           } catch (err) {
-            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
             console.log(err);
           }
         }
@@ -142,7 +150,22 @@ const start = async () => {
             await toolspcardsupload(thumbPath, pathSP_warehouse);
             await bot.sendMessage(chatID, "Файл загружен успешно");
           } catch (err) {
-            await bot.sendMessage(chatID, "Произошла ошибка", err);
+            await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
+            console.log(err);
+          }
+        }
+        if (msg.document.file_name === "spanalog.txt") {
+          try {
+            await bot.sendMessage(
+              chatID,
+              "Началась загрузка файоа файла с аналогами ЗЧ"
+            );
+            const thumbPath = await bot.getFileLink(msg.document.file_id);
+            await bot.sendMessage(chatID, thumbPath);
+            await toolspcardsupload(thumbPath, pathSP_analog);
+            await bot.sendMessage(chatID, "Файл загружен успешно");
+          } catch (err) {
+            await bot.sendMessage(chatID, `Произошла ошибка, ${err}`);
             console.log(err);
           }
         }
