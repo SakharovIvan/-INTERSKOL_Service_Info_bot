@@ -45,6 +45,7 @@ const spCheck = async (chatID, text) => {
       for (let el of analog){
         analogInlineKeyboar.push([{ text: el["analog"], callback_data: el["analog"] }])
       }
+      if (analogInlineKeyboar.length===0){return}
       bot.sendMessage(chatID,"Есть аналоги 🔁",
         {
           reply_markup: {
